@@ -1,7 +1,11 @@
 package com.mall.food;
 
 import com.mall.food.mapper.AdministratorMapper;
+import com.mall.food.mapper.AdvertisementMapper;
+import com.mall.food.mapper.BusinessMapper;
 import com.mall.food.pojo.Administrator;
+import com.mall.food.pojo.Advertisement;
+import com.mall.food.pojo.Business;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.annotation.MapperScan;
@@ -43,6 +47,21 @@ public class FoodDeliveryApplicationTests {
         System.out.println(empList);
     }
 
+    @Autowired
+    private AdvertisementMapper advertisementMapper;
 
+    @Test
+    public void contextLoads3(){
+        List<Advertisement> empList = advertisementMapper.selectAll();
+        System.out.println(empList);
+    }
 
+    @Autowired
+    private BusinessMapper businessMapper;
+
+    @Test
+    public void contextLoads4(){
+        List<Business> empList = businessMapper.selectAll();
+        System.out.println(empList);
+    }
 }

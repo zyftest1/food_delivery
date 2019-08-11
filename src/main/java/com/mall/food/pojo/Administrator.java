@@ -10,5 +10,4 @@ public class Administrator {
     private String aTel;
     private String aEmail;
     private String aHead;
-
 }
