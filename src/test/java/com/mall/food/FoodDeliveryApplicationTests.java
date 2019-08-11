@@ -1,7 +1,14 @@
 package com.mall.food;
 
 import com.mall.food.mapper.AdministratorMapper;
+import com.mall.food.mapper.CouponMapper;
+import com.mall.food.mapper.OrderMapper;
+import com.mall.food.mapper.OrderScheduleMapper;
 import com.mall.food.pojo.Administrator;
+import com.mall.food.pojo.Coupon;
+import com.mall.food.pojo.Order;
+import com.mall.food.pojo.OrderSchedule;
+import org.apache.ibatis.annotations.Select;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.annotation.MapperScan;
@@ -25,7 +32,16 @@ public class FoodDeliveryApplicationTests {
 //    private BasicDataSource basicDataSource;
 
     @Autowired
+    private AdministratorMapper administratorMapper;
+    @Autowired
     private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private OrderScheduleMapper orderScheduleMapper;
+    @Autowired
+    private OrderMapper orderMapper;
+    @Autowired
+    private CouponMapper couponMapper;
+
 
     @Test
     public void contextLoads() throws SQLException {
@@ -34,13 +50,12 @@ public class FoodDeliveryApplicationTests {
         System.out.println(count);
     }
 
-    @Autowired
-    private AdministratorMapper administratorMapper;
-
     @Test
     public void contextLoads2(){
-        List<Administrator> empList = administratorMapper.selectAll();
-        System.out.println(empList);
+//        List<Order> empList = orderMapper.selAllOrders();
+//        System.out.println(empList);
+        List<Coupon> coupons = couponMapper.selAllCoupons();
+        System.out.println(coupons);
     }
 
 

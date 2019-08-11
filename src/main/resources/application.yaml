@@ -48,6 +48,7 @@ spring:
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
+    aggressive-lazy-loading: true
   #配置主配置文件位置  和mapper.xml文件位置
   config-location:
   mapper-locations:
