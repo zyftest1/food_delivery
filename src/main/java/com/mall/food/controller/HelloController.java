@@ -30,16 +30,16 @@ import java.util.List;
 //    }
 //
 //}
-@Controller
-public class HelloController {
-
-    @Autowired
-    private AdministratorService administratorService;
-    @RequestMapping("/all")
-    public String findEmpAll(Model model){
-//        List<Advertisement> emps = administratorService.getAll();
-//        model.addAttribute("emps",emps);
-        return "about";
-    }
-
-}
+//@Controller
+//public class HelloController {
+//
+//    @Autowired
+//    private AdministratorService administratorService;
+//    @RequestMapping("/about")
+//    public String findEmpAll(Model model){
+////        List<Advertisement> emps = administratorService.getAll();
+////        model.addAttribute("emps",emps);
+//        return "about";
+//    }
+//
+//}

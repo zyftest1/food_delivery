@@ -37,7 +37,7 @@ spring:
         login-username: admin
         login-password: 123456
         reset-enable: false
-        url-pattern: /druid/*
+#        url-pattern: /druid/*
         # 添加IP白名单
         #allow:
         # 添加IP黑名单，当白名单和黑名单重复时，黑名单优先级更高
@@ -50,13 +50,21 @@ spring:
 #        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/,*.html"
   thymeleaf: #关闭thymeleaf默认缓存
     cache: false
-    mvc:
-      date-format: yyyy-MM-dd HH:mm:ss
-    jackson:
-      date-format: yyyy-MM-dd HH:mm:ss
-      time-zone: GMT+8
-      serialization:
-        write-dates-as-timestamps: false
+  mvc:
+    date-format: yyyy-MM-dd HH:mm:ss
+
+    servlet:
+      load-on-startup: 1
+    view:
+      prefix: classpath:/templates/
+      suffix: classpath:/.html
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    serialization:
+      write-dates-as-timestamps: false
+  resources:
+    static-locations: classpath:\templates,classpath:\static
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
