@@ -9,8 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class DefaultConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-//        先经过controller层的处理器,在经过下面的
-        registry.addViewController("/index.html").setViewName("index");
+
     }
 //    //日期格式化有错
 //    @Override
