@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
 <title>DeathGhost-注册</title>
@@ -58,11 +58,14 @@ Author URI: http://www.deathghost.cn
 </header>
 <!--Start content-->
 <section class="Psection MT20">
- <form>
+ <form action="/confirm">
   <table class="Register">
   <tr>
-  <td width="40%" align="right" class="FontW">用户名：</td>
-  <td><input type="text" name="" required="" autofocus=""></td>
+  <td width="40%" align="right" class="FontW" na>用户名：</td>
+  <td><input type="text" id="userName" name="userName" autofocus="">
+   <div style="color: red" th:text="${msg}">
+   </div>
+  </td>
   </tr>
   <tr>
   <td width="40%" align="right" class="FontW">密码：</td>
@@ -90,7 +93,8 @@ Author URI: http://www.deathghost.cn
   </tr>
   <tr>
   <td width="40%" align="right"></td>
-  <td><input type="submit" name="" class="Submit_b" value="注 册">( 已经是会员，<a href="login.html" class="BlueA">请登录</a> )</td>
+  <td><input type="submit" name="" class="Submit_b" value="注 册"></td>
+<!--   ( 已经是会员，<a href="login.html" class="BlueA">请登录</a> )-->
   </tr>
   </table>
  </form>
