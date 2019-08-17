@@ -13,6 +13,9 @@ public interface UserCustomerMapper {
     @Select("select * from user_customer where user_id = #{userId}")
     public UserCustomer selectUserCustomerByUserId(Integer userId);
 
+    @Select("select * from user_customer where user_name = #{userName}")
+    public UserCustomer selectUserCustomerByUserName(String userName);
+
     @Select("select * from user_customer")
     public List<UserCustomer> selectAll();
 
