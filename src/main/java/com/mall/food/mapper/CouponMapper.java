@@ -11,6 +11,6 @@ import java.util.List;
 public interface CouponMapper {
     @Select("select* from coupon")
     public List<Coupon> selAllCoupons();
-    @Select("select* from coupon where coupon = {#coupon}")
+    @Select("select* from coupon where coupon = #{coupon}")
     public Coupon selCouponByType(Integer coupon);
 }

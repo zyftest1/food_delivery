@@ -1,13 +1,5 @@
 ﻿<!DOCTYPE html>
-<!--/*技术支持，小庄602842076     验证：商城技术支持*/
-/*技术支持，小庄602842076    验证：商城技术支持*/
-/*技术支持，小庄602842076    验证：商城技术支持*/
-/*技术支持，小庄602842076    验证：商城技术支持*/
-/*技术支持，小庄602842076    验证：商城技术支持*/
-/*https://shop116998991.taobao.com/*/
-/*https://shop116998991.taobao.com/*/
-/*https://shop116998991.taobao.com/*/-->
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 	<head>
 		<meta charset="utf-8">
@@ -68,7 +60,6 @@
 							<a href="#" rel="nofollow" target="_blank"><span>手机客户端</span></a>
 						</li>
 					</ul>
-
 				</div>
 			</header>
 
@@ -136,31 +127,8 @@
 								<div class="clearfix restaurant-food">
 									<label class="fl">菜品分类：</label>
 									<ul class="clearfix">
-
 										<li ng-class="{cur:cuisineIndex=='all'}" ng-click="changeCuisine('all')">所有菜系</li>
-
-										<li ng-class="{cur:cuisineIndex=='cantonese'}" ng-click="changeCuisine('cantonese')">粤菜</li>
-
-										<li ng-class="{cur:cuisineIndex=='chinese-fastfood'}" ng-click="changeCuisine('chinese-fastfood')">中餐简餐</li>
-
-										<li ng-class="{cur:cuisineIndex=='drink-snack'}" ng-click="changeCuisine('drink-snack')">饮料小吃</li>
-
-										<li ng-class="{cur:cuisineIndex=='japan-korea'}" ng-click="changeCuisine('japan-korea')">日韩料理</li>
-
-										<li ng-class="{cur:cuisineIndex=='noodles-pastry'}" ng-click="changeCuisine('noodles-pastry')">面食|糕点</li>
-
-										<li ng-class="{cur:cuisineIndex=='pizza'}" ng-click="changeCuisine('pizza')">匹萨</li>
-
-										<li ng-class="{cur:cuisineIndex=='seafood'}" ng-click="changeCuisine('seafood')">生鲜</li>
-
-										<li ng-class="{cur:cuisineIndex=='sichuan'}" ng-click="changeCuisine('sichuan')">川菜</li>
-
-										<li ng-class="{cur:cuisineIndex=='southeast-asian'}" ng-click="changeCuisine('southeast-asian')">东南亚菜</li>
-
-										<li ng-class="{cur:cuisineIndex=='supermarket'}" ng-click="changeCuisine('supermarket')">超市</li>
-
-										<li ng-class="{cur:cuisineIndex=='western'}" ng-click="changeCuisine('western')">西餐</li>
-
+										<li th:each="cTypes : ${commodityTypes}" th:text="${cTypes.type}"></li>
 									</ul>
 								</div>
 								<span class="more" toogle-nav-menu="24">更多<i></i></span>
