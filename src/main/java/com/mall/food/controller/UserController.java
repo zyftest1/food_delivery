@@ -82,24 +82,31 @@ public class UserController {
             return  "login";
         }
     }
-    @RequestMapping("/register")
+
+    @RequestMapping("/register1")
     public String confirmUserName(Model model,String userName,String password,String password2,String email,String tel,String captcha){
         List<UserCustomer> userCustomerList = userCustomerService.getAll();
-        for (UserCustomer userCustomer:userCustomerList) {
-            if (userCustomer.getUserName().equals(userName)){
-                model.addAttribute("msg","用户名被占用");
+        for (UserCustomer userCustomer : userCustomerList) {
+            if (userCustomer.getUserName().equals(userName)) {
+                model.addAttribute("msg", "用户名被占用");
                 return "register";
             }
         }
-        if (!password.equals(password2)){
-            model.addAttribute("msg2","密码不相等,请重新输入");
+        if (!password.equals(password2)) {
+            model.addAttribute("msg2", "密码不相等,请重新输入");
             return "register";
         }
 
         UserCustomer userCustomer = UserCustomer.builder().userId(tel).userName(userName).password(password).email(email).tel(tel).userKey("123456").balance(new BigDecimal(0.00)).member(0).build();
         userCustomerService.insert(userCustomer);
-//        model.addAttribute("msg1","用户名可用");
+        //        model.addAttribute("msg1","用户名可用");
         return "login";
+    }
+    @RequestMapping("/register")
+    public String register(Model model,HttpSession session){
+        UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
+        session.setAttribute("userCustomer",userCustomer);
+        return "register";
     }
     @RequestMapping("/shop")
     public String shop(Model model,HttpSession session){
