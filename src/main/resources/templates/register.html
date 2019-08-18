@@ -10,20 +10,52 @@
 <script type="text/javascript" src="js\public.js"></script>
 <script type="text/javascript" src="js\jquery.js"></script>
 <script type="text/javascript" src="js\jqpublic.js"></script>
-<!--
-Author: DeathGhost
-Author URI: http://www.deathghost.cn
--->
+ <script type="text/javascript" src="webjars/jquery/3.4.1/jquery.js"></script>
+<!-- <style type="text/css">-->
+<!--  .enable{-->
+<!--   color: green;-->
+<!--  }-->
+<!--  .disable{-->
+<!--   color: red;-->
+<!--  }-->
+<!-- </style>-->
+<!-- <script type="text/javascript">-->
+<!--  $(function () {-->
+<!--   $("#userName").blur(function () {-->
+<!--    var userName = $("#userName").val();-->
+<!--    // alert(userName)-->
+<!--    // $("#userName")是id选择器,获得id为userName的标签,通过.val(),获得这个标签的value的值,赋值给你声明的变量-->
+<!--    $.post({-->
+<!--     url:"/confirm?userName="+userName,-->
+<!--     data:{userName:userName},-->
+<!--     dataType:'text',-->
+<!--     success:function (data) {-->
+<!--      alert(data)-->
+<!--      if(data == "用户名可用"){-->
+<!--       $("#msg").removeClass().addClass("enable");-->
+<!--       $("#msg").text(data);-->
+<!--      }else {-->
+<!--       $("#msg").removeClass().addClass("disable");-->
+<!--       $("#msg").text(data);-->
+<!--      }-->
+<!--     }-->
+<!--    })-->
+<!--   })-->
+<!--  });-->
+<!-- </script>-->
 </head>
 <body>
 <header>
  <section class="Topmenubg">
   <div class="Topnav">
-   <div class="LeftNav">
+   <div class="LeftNav" th:if="${session.userCustomer.userName == null}">
     <a href="register.html">注册</a>/<a href="login.html">登录</a><a href="#">QQ客服</a><a href="#">微信客服</a><a href="#">手机客户端</a>
    </div>
+   <div class="LeftNav" th:if="${session.userCustomer != null}" hidden="hidden">
+    <a href="/account" th:text="${session.userCustomer.userName}"></a>/<a href="/logout">注销</a><a href="#">QQ客服</a><a href="#">微信客服</a><a href="#">手机客户端</a>
+   </div>
    <div class="RightNav">
-    <a href="user_center.html">用户中心</a> <a href="user_orderlist.html" target="_blank" title="我的订单">我的订单</a> <a href="cart.html">购物车（0）</a> <a href="user_favorites.html" target="_blank" title="我的收藏">我的收藏</a> <a href="#">商家入驻</a>
+    <a href="/center">用户中心</a> <a href="/orderlist" target="_blank" title="我的订单">我的订单</a> <a href="/cart">购物车（0）</a> <a href="/favorites" target="_blank" title="我的收藏">我的收藏</a> <a href="#">商家入驻</a>
    </div>
   </div>
  </section>
@@ -49,47 +81,47 @@ Author URI: http://www.deathghost.cn
  </div>
  <nav class="menu_bg">
   <ul class="menu">
-   <li><a href="index.html">首页</a></li>
-   <li><a href="list.html">订餐</a></li>
-   <li><a href="category.html">积分商城</a></li>
-   <li><a href="article_read.html">关于我们</a></li>
+   <li><a href="/index">首页</a></li>
+   <li><a href="/list">订餐</a></li>
+   <li><a href="/category">积分商城</a></li>
+   <li><a href="/read">关于我们</a></li>
   </ul>
  </nav>
 </header>
 <!--Start content-->
 <section class="Psection MT20">
- <form action="/confirm">
+ <form action="/register">
   <table class="Register">
   <tr>
   <td width="40%" align="right" class="FontW" na>用户名：</td>
   <td><input type="text" id="userName" name="userName" autofocus="">
-   <div style="color: red" th:text="${msg}">
-   </div>
+   <div style="color: red" th:text="${msg}"></div>
+   <div style="green: #33ff27" th:text="${msg1}"></div>
   </td>
   </tr>
   <tr>
   <td width="40%" align="right" class="FontW">密码：</td>
-  <td><input type="password" name="" required=""></td>
+  <td><input type="password" name="password" required=""></td>
   </tr>
   <tr>
   <td width="40%" align="right" class="FontW">再次确认：</td>
-  <td><input type="password" name="" required=""></td>
+  <td><input type="password" name="password2" required=""></td>
   </tr>
   <tr>
   <td width="40%" align="right" class="FontW">电子邮件：</td>
-  <td><input type="email" name="" required=""></td>
+  <td><input type="email" name="email" required=""></td>
   </tr>
   <tr>
   <td width="40%" align="right" class="FontW">手机号码：</td>
-  <td><input type="text" name="" required="" pattern="[0-9]{11}"></td>
+  <td><input type="text" name="tel" required=""  pattern="[0-9]{11}"></td>
   </tr>
-  <tr>
-  <td width="40%" align="right" class="FontW">手机校验码：</td>
-  <td><input type="text" name="" required="" pattern="[0-9]{6}"></td>
-  </tr>
+<!--  <tr>-->
+<!--  <td width="40%" align="right" class="FontW">手机校验码：</td>-->
+<!--  <td><input type="text" name=""  pattern="[0-9]{6}"></td>-->
+<!--  </tr>-->
   <tr>
   <td width="40%" align="right" class="FontW">验证码：</td>
-  <td><input type="text" name="" required=""><img src="upload\captcha.png" style="margin-left:8px; vertical-align:bottom" width="83" height="36"></td>
+  <td><input type="text" name="captcha" ><img src="upload\captcha.png" style="margin-left:8px; vertical-align:bottom" width="83" height="36"></td>
   </tr>
   <tr>
   <td width="40%" align="right"></td>
@@ -99,14 +131,6 @@ Author URI: http://www.deathghost.cn
   </table>
  </form>
 </section>
-<!--End content-->
-<div class="F-link">
-  <span>友情链接：</span>
-  <a href="http://www.deathghost.cn" target="_blank" title="DeathGhost">DeathGhost</a>
-  <a href="http://www.sucaihuo.com/pins/15966.html" target="_blank" title="免费后台管理模板">绿色清爽版通用型后台管理模板免费下载</a>
-  <a href="http://www.sucaihuo.com/pins/17567.html" target="_blank" title="果蔬菜类模板源码">HTML5果蔬菜类模板源码</a>
-  <a href="http://www.sucaihuo.com/pins/14931.html" target="_blank" title="黑色的cms商城网站后台管理模板">黑色的cms商城网站后台管理模板</a>
- </div>
 <footer>
  <section class="Otherlink">
   <aside>
@@ -124,36 +148,36 @@ Author URI: http://www.deathghost.cn
    </div>
   </aside>
   <section>
-    <div>
+   <div>
     <span><i class="i1"></i>配送支付</span>
     <ul>
-     <li><a href="article_read.html" target="_blank" title="标题">支付方式</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">配送方式</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">配送效率</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">服务费用</a></li>
+     <li><a href="/read" target="_blank" title="标题">支付方式</a></li>
+     <li><a href="/read" target="_blank" title="标题">配送方式</a></li>
+     <li><a href="/read" target="_blank" title="标题">配送效率</a></li>
+     <li><a href="/read" target="_blank" title="标题">服务费用</a></li>
     </ul>
-    </div>
-    <div>
+   </div>
+   <div>
     <span><i class="i2"></i>关于我们</span>
     <ul>
-     <li><a href="article_read.html" target="_blank" title="标题">招贤纳士</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">网站介绍</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">配送效率</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">商家加盟</a></li>
+     <li><a href="/read" target="_blank" title="标题">招贤纳士</a></li>
+     <li><a href="/read" target="_blank" title="标题">网站介绍</a></li>
+     <li><a href="/read" target="_blank" title="标题">配送效率</a></li>
+     <li><a href="/read" target="_blank" title="标题">商家加盟</a></li>
     </ul>
-    </div>
-    <div>
+   </div>
+   <div>
     <span><i class="i3"></i>帮助中心</span>
     <ul>
-     <li><a href="article_read.html" target="_blank" title="标题">服务内容</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">服务介绍</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">常见问题</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">网站地图</a></li>
+     <li><a href="/read" target="_blank" title="标题">服务内容</a></li>
+     <li><a href="/read" target="_blank" title="标题">服务介绍</a></li>
+     <li><a href="/read" target="_blank" title="标题">常见问题</a></li>
+     <li><a href="/read" target="_blank" title="标题">网站地图</a></li>
     </ul>
-    </div>
+   </div>
   </section>
  </section>
-<div class="copyright">© 版权所有 2016 DeathGhost 技术支持：<a href="http://www.deathghost.cn" title="DeathGhost">DeathGhost</a></div>
-</footer>
+ <div class="copyright">© 版权所有 2016 DeathGhost 技术支持：<a href="http://www.deathghost.cn" title="DeathGhost">DeathGhost</a></div>
+</footer>>
 </body>
 </html>

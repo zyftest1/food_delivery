@@ -1,16 +1,16 @@
 package com.mall.food.controller;
 
 import com.mall.food.pojo.UserCustomer;
-import com.mall.food.service.AdministratorService;
 import com.mall.food.service.UserCustomerService;
-import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.thymeleaf.util.StringUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Controller
@@ -18,8 +18,50 @@ public class UserController {
     @Autowired
     private UserCustomerService userCustomerService;
 
+    @RequestMapping("/read")
+    public String read(Model model,HttpSession session){
+        UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
+        session.setAttribute("userCustomer",userCustomer);
+        return "article_read";
+    }
+    @RequestMapping("/cart")
+    public String cart(Model model,HttpSession session){
+        UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
+        session.setAttribute("userCustomer",userCustomer);
+        return "cart";
+    }
+    @RequestMapping("/category")
+    public String category(Model model,HttpSession session){
+        UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
+        session.setAttribute("userCustomer",userCustomer);
+        return "category";
+    }
+    @RequestMapping("/confirm")
+    public String confirm(Model model,HttpSession session){
+        UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
+        session.setAttribute("userCustomer",userCustomer);
+        return "confirm_order";
+    }
+    @RequestMapping("/detailsp")
+    public String detailsp(Model model,HttpSession session){
+        UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
+        session.setAttribute("userCustomer",userCustomer);
+        return "detailsp";
+    }
+    @RequestMapping("/index")
+    public String index(Model model,HttpSession session){
+        UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
+        session.setAttribute("userCustomer",userCustomer);
+        return "index";
+    }
+    @RequestMapping("/list")
+    public String list(Model model,HttpSession session){
+        UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
+        session.setAttribute("userCustomer",userCustomer);
+        return "list";
+    }
     @RequestMapping("/login")
-    public String userLogin(Model model,String userName,String password, HttpSession session){
+    public String userLogin(Model model, String userName, String password, HttpSession session){
         if (!StringUtils.isEmpty(userName)&& !StringUtils.isEmpty(password)){
             UserCustomer userCustomer = userCustomerService.getUserCustomreByName(userName);
             if (userCustomer == null){
@@ -38,19 +80,84 @@ public class UserController {
             return  "login";
         }
     }
-
-    @RequestMapping("/confirm")
-    public void confirmUserName(Model model,String userName){
-        System.out.println(userName);
+    @RequestMapping("/register")
+    public String confirmUserName(Model model,String userName,String password,String password2,String email,String tel,String captcha){
         List<UserCustomer> userCustomerList = userCustomerService.getAll();
-        String msg ="";
         for (UserCustomer userCustomer:userCustomerList) {
             if (userCustomer.getUserName().equals(userName)){
                 model.addAttribute("msg","用户名被占用");
-            }else{
-                model.addAttribute("msg","用户名可用");
+                return "register";
             }
         }
+        if (!password.equals(password2)){
+            model.addAttribute("msg2","密码不相等,请重新输入");
+            return "register";
+        }
+
+        UserCustomer userCustomer = UserCustomer.builder().userId(tel).userName(userName).password(password).email(email).tel(tel).userKey("123456").balance(new BigDecimal(0.00)).member(0).build();
+        userCustomerService.insert(userCustomer);
+//        model.addAttribute("msg1","用户名可用");
+        return "login";
+    }
+    @RequestMapping("/shop")
+    public String shop(Model model,HttpSession session){
+        UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
+        session.setAttribute("userCustomer",userCustomer);
+        return "shop";
+    }
+    @RequestMapping("/account")
+    public String account(Model model,HttpSession session){
+        UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
+        session.setAttribute("userCustomer",userCustomer);
+        return "user_account";
+    }
+    @RequestMapping("/address")
+    public String address(Model model,HttpSession session){
+        UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
+        session.setAttribute("userCustomer",userCustomer);
+        return "user_address";
+    }
+    @RequestMapping("/center")
+    public String center(Model model,HttpSession session){
+        UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
+        session.setAttribute("userCustomer",userCustomer);
+        return "user_center";
+    }
+    @RequestMapping("/coupon")
+    public String coupon(Model model,HttpSession session){
+        UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
+        session.setAttribute("userCustomer",userCustomer);
+        return "user_coupon";
+    }
+    @RequestMapping("/favorites")
+    public String favorites(Model model,HttpSession session){
+        UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
+        session.setAttribute("userCustomer",userCustomer);
+        return "favorites";
+    }
+    @RequestMapping("/message")
+    public String message(Model model,HttpSession session){
+        UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
+        session.setAttribute("userCustomer",userCustomer);
+        return "user_message";
+    }
+    @RequestMapping("/order")
+    public String order(Model model,HttpSession session){
+        UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
+        session.setAttribute("userCustomer",userCustomer);
+        return "user_order";
+    }
+    @RequestMapping("/orderlist")
+    public String orderlist(Model model,HttpSession session){
+        UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
+        session.setAttribute("userCustomer",userCustomer);
+        return "user_orderlist";
+    }
+
+    @RequestMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "index";
     }
 
 }

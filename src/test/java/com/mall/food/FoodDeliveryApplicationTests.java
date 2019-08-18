@@ -82,4 +82,19 @@ public class FoodDeliveryApplicationTests {
         System.out.println(empList);
     }
 
+    @Autowired
+    private BusinessMapper businessMapper1;
+    @Test
+    public void contextLoads6(){
+        BigDecimal bigDecimal = BigDecimal.valueOf(0.00);
+        BigDecimal bigDecimal2 = BigDecimal.valueOf(0.00);
+        Business userCustomer = Business.builder().bId("123").bName("123").bTel("123").password("123456").key("123456").balance(bigDecimal).bDelivery(bigDecimal2).build();
+        System.out.println(userCustomer);
+        businessMapper1.insert(userCustomer);
+        List<Business> empList = businessMapper1.selectAll();
+        System.out.println(empList);
+    }
+
+
+
 }

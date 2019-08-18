@@ -32,5 +32,9 @@ public class UserCustomerService {
         List<UserCustomer> userCustomerList = userCustomerMapper.selectAll();
         return userCustomerList;
     }
+
+    public void insert(UserCustomer userCustomer){
+        userCustomerMapper.insertUserCustomer(userCustomer);
+    }
 }
 
