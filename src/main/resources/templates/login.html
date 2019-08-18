@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
  <meta charset="utf-8">
  <title>DeathGhost-登录</title>
@@ -58,15 +58,18 @@
 </header>
 <!--Start content-->
 <section class="Psection MT20">
- <form action="user_center.html">
+ <form action="/login">
   <table class="login">
    <tr>
     <td width="40%" align="right" class="FontW">账号：</td>
-    <td><input type="text" name="" required="" autofocus="" placeholder="账号/电子邮件/手机号码"></td>
+    <td><input type="text" name="userName" required="" autofocus="" placeholder="账号/电子邮件/手机号码"></td>
    </tr>
    <tr>
     <td width="40%" align="right" class="FontW">密码：</td>
-    <td><input type="password" name="" required=""></td>
+    <td><input type="password" name="password" required="">
+     <div style="color: red" th:text="${msg}">
+     </div>
+    </td>
    </tr>
    <tr>
     <td width="40%" align="right" class="FontW">验证码：</td>
@@ -74,7 +77,8 @@
    </tr>
    <tr>
     <td width="40%" align="right"></td>
-    <td><input type="submit" name="" value="登 录" class="Submit_b">( 已经是***会员，<a href="#" class="BlueA">请登录</a> )</td>
+    <td><input type="submit" name="" value="登 录" class="Submit_b"></td>
+<!--    ( 已经是***会员，<a href="#" class="BlueA">请登录</a> )-->
    </tr>
   </table>
  </form>

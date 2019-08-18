@@ -12,19 +12,25 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@CacheConfig(cacheNames = "UserCustomerCache")
 public class UserCustomerService {
 
     @Autowired
     private UserCustomerMapper userCustomerMapper;
 
-    @Cacheable(value = "userCustomer",key = "targetClass+getMethodName()")
     public UserCustomer getUserCustomreByName(String userName){
+        System.out.println(userName);
         UserCustomer userCustomer = userCustomerMapper.selectUserCustomerByUserName(userName);
-        if (userCustomer == null && userCustomer.equals("")){
+        if (userCustomer != null){
+            System.out.println(userCustomer);
+            return userCustomer;
+        }else {
             return null;
         }
-        return userCustomer;
+    }
+
+    public List<UserCustomer> getAll(){
+        List<UserCustomer> userCustomerList = userCustomerMapper.selectAll();
+        return userCustomerList;
     }
 }
 

@@ -2,11 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>DeathGhost</title>
-    <meta name="keywords" content="DeathGhost,DeathGhost.cn,web前端设,移动WebApp开发">
-    <meta name="description" content="DeathGhost.cn::H5 WEB前端设计开发!">
-    <meta name="author" content="DeathGhost">
-    <link href="style\style.css" rel="stylesheet" type="text/css">
+    <title>主界面</title>
+    <link href="style\style.css" rel="stylesheet" type="text/css" th:href="@{style/style.css}">
     <script type="text/javascript" src="js\public.js" th:href="@{js/public.js}"></script>
     <script type="text/javascript" src="js\jquery.js" th:href="@{js/jquery.js}"></script>
     <script type="text/javascript" src="js\jqpublic.js" th:href="@{js/jqpublic.js}"></script>
@@ -68,9 +65,11 @@
     </aside>
     <div class="F-middle">
         <ul class="rslides f426x240">
-            <li><a href="javascript:"><img src="upload\01.jpg"></a></li>
-            <li><a href="javascript:"><img src="upload\02.jpg"></a></li>
-            <li><a href="javascript:"><img src="upload\03.jpg"></a></li>
+            <li th:each="advertisement : ${advertisements}">
+                <a href="javascript:">
+                <img th:src="${advertisement.picture}" style="height:403px;width:600px">
+                </a>
+            </li>
         </ul>
     </div>
     <aside class="C-left">
@@ -93,9 +92,10 @@
                 <li class="current">点菜</li>
                 <li>餐馆</li>
                 <p class="class_B">
-                <a th:each="types : ${commodityTypes}" th:text="${types.type}"></a>
+                    <a href="#" th:each="types : ${commodityTypes}" th:text="${types.type}"></a>
                 </p>
             </ul>
+
             <div id="Indexcontent">
                 <ul style="display:block;">
                     <li>

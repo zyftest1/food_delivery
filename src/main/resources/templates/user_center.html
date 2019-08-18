@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html  lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
 <title>DeathGhost-用户中心</title>
@@ -76,7 +76,7 @@ Author URI: http://www.deathghost.cn
    <span class="Weltitle Block Font16 CorRed FontW Lineheight35">Welcome欢迎光临！</span>
    <div class="U-header MT20 Overflow">
     <img src="upload\testuser.jpg">
-    <p class="Font14 FontW">DeathGhost 欢迎您回到 用户中心！</p>
+    <p class="Font14 FontW"> <span th:text="${session.userCustomer.userName}"></span>欢迎您回到 用户中心！</p>
     <p class="Font12">您的上一次登录时间:<time> 2016-05-18 14:20:04</time></p>
     <p class="Font12 CorRed FontW">我的优惠券( 0 ) | 我的积分( 0 )</p>
    </div>

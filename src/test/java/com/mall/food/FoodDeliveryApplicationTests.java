@@ -1,18 +1,8 @@
 package com.mall.food;
 
-import com.mall.food.mapper.AdministratorMapper;
-import com.mall.food.mapper.CouponMapper;
-import com.mall.food.mapper.OrderMapper;
-import com.mall.food.mapper.OrderScheduleMapper;
-import com.mall.food.mapper.AdvertisementMapper;
-import com.mall.food.mapper.BusinessMapper;
-import com.mall.food.pojo.Administrator;
-import com.mall.food.pojo.Coupon;
-import com.mall.food.pojo.Order;
-import com.mall.food.pojo.OrderSchedule;
+import com.mall.food.mapper.*;
+import com.mall.food.pojo.*;
 import org.apache.ibatis.annotations.Select;
-import com.mall.food.pojo.Advertisement;
-import com.mall.food.pojo.Business;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.annotation.MapperScan;
@@ -22,7 +12,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.sql.DataSource;
+import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 @MapperScan("com.mall.food.mapper")
@@ -72,11 +64,22 @@ public class FoodDeliveryApplicationTests {
     }
 
     @Autowired
-    private BusinessMapper businessMapper;
+    private UserCustomerMapper businessMapper;
 
     @Test
     public void contextLoads4(){
-        List<Business> empList = businessMapper.selectAll();
+        UserCustomer empList = businessMapper.selectUserCustomerByUserName("花花");
         System.out.println(empList);
     }
+
+    @Test
+    public void contextLoads5(){
+        BigDecimal bigDecimal = BigDecimal.valueOf(0.00);
+        UserCustomer userCustomer = UserCustomer.builder().userId("123").userName("123").tel("123").password("123456").userKey("123456").balance(bigDecimal).member(1).build();
+        System.out.println(userCustomer);
+        businessMapper.insertUserCustomer(userCustomer);
+        List<UserCustomer> empList = businessMapper.selectAll();
+        System.out.println(empList);
+    }
+
 }
