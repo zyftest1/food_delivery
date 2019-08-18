@@ -77,30 +77,42 @@ Author URI: http://www.deathghost.cn
   <!--user Account-->
   <section class="AccManage Overflow">
    <span class="AMTitle Block Font14 FontW Lineheight35">账户管理</span>
-   <p>登陆邮箱：232***413@qq.com ( <a href="#" target="_blank">更换手机号码</a> )</p>
-   <p>手机号码：183****5673 ( <a href="#" target="_blank">更换手机号码</a> ) ( <a href="#" target="_blank">解绑手机</a> )</p>
-   <p>上次登陆：2014年09月22日 11:40:36( *如非本人登陆，请立即<a href="#" target="_blank">修改您的密码</a>！ )</p>
-   <form>
+<!--   <p>登陆邮箱：232***413@qq.com ( <a href="#" target="_blank">更换手机号码</a> )</p>-->
+<!--   <p>手机号码：183****5673 ( <a href="#" target="_blank">更换手机号码</a> ) ( <a href="#" target="_blank">解绑手机</a> )</p>-->
+<!--   <p>上次登陆：2014年09月22日 11:40:36( *如非本人登陆，请立即<a href="#" target="_blank">修改您的密码</a>！ )</p>-->
+   <form action="/updateAccount">
     <table>
     <tr>
-    <td width="30%" align="right">*修改头像：</td>
-    <td><input name="" type="file"><button>确定</button></td>
-    </tr>
-    <tr>
     <td width="30%" align="right">*昵称：</td>
-    <td><input type="text" name="" value="DeathGhost"></td>
+    <td><input type="text" name="userName" th:value="${userName}"></td>
     </tr>
     <tr>
     <td width="30%" align="right">*邮箱：</td>
-    <td><input type="email" name="" value="232650413@qq.com"></td>
+    <td><input type="email" name="email" th:value="${email}"></td>
     </tr>
     <tr>
     <td width="30%" align="right">*手机：</td>
-    <td><input type="tel" name="" value="18309275673"></td>
+    <td><input type="text" name="tel" th:value="${tel}"></td>
     </tr>
+     <tr>
+      <td width="30%" align="right">*登录密码：</td>
+      <td><input type="text" name="password" placeholder="请输入登录密码" th:value="${password}"></td>
+     </tr>
+     <tr>
+      <td width="30%" align="right">*姓名：</td>
+      <td><input type="text" name="name" placeholder="请输入姓名" th:value="${name}"></td>
+     </tr>
+     <tr>
+      <td width="30%" align="right">*年龄：</td>
+      <td><input type="text" name="age" placeholder="请输入年龄" th:value="${age}"></td>
+     </tr>
+     <tr>
+      <td width="30%" align="right">*身份证号：</td>
+      <td><input type="text" name="idcard" placeholder="请输入身份证号" th:value="${idcard}"></td>
+     </tr>
     <tr>
     <td></td>
-    <td><input name="" type="submit" value="保 存"></td>
+    <td><input name="" type="submit" value="保 存" ></td>
     </tr>
     </table>
    </form>

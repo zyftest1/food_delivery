@@ -118,8 +118,30 @@ public class UserController {
     public String account(Model model,HttpSession session){
         UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
         session.setAttribute("userCustomer",userCustomer);
+        model.addAttribute("userName",userCustomer.getUserName());
+        model.addAttribute("password",userCustomer.getPassword());
+        model.addAttribute("email",userCustomer.getEmail());
+        model.addAttribute("tel",userCustomer.getTel());
+        model.addAttribute("name",userCustomer.getName());
+        model.addAttribute("age",userCustomer.getAge());
+        model.addAttribute("idcard",userCustomer.getIdcard());
         return "user_account";
     }
+    @RequestMapping("/updateAccount")
+    public String updateAccount(Model model,HttpSession session,String userName,String email,String tel,String password,String name,String age,String idcard){
+        UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
+        session.setAttribute("userCustomer",userCustomer);
+        userCustomer.setUserName(userName);
+        userCustomer.setEmail(email);
+        userCustomer.setTel(tel);
+        userCustomer.setPassword(password);
+        userCustomer.setName(name);
+        userCustomer.setAge(Integer.valueOf(age));
+        userCustomer.setIdcard(idcard);
+        userCustomerService.update(userCustomer);
+        return "/account";
+    }
+
     @RequestMapping("/address")
     public String address(Model model,HttpSession session){
         UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");

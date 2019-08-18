@@ -36,5 +36,9 @@ public class UserCustomerService {
     public void insert(UserCustomer userCustomer){
         userCustomerMapper.insertUserCustomer(userCustomer);
     }
+
+    public void update(UserCustomer userCustomer){
+        userCustomerMapper.updateUserCustomer(userCustomer);
+    }
 }
 

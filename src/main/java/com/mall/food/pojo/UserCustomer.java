@@ -19,7 +19,7 @@ public class UserCustomer {
     private Integer age;
     private String sex;
     private String address;
-    private String idCard;
+    private String idcard;
     private Date birthday;
     private String job;
     private BigDecimal balance;
