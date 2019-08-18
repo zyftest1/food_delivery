@@ -21,7 +21,9 @@ public class UserController {
     @RequestMapping("/read")
     public String read(Model model,HttpSession session){
         UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
-        session.setAttribute("userCustomer",userCustomer);
+        if (userCustomer != null){
+            session.setAttribute("userCustomer",userCustomer);
+        }
         return "article_read";
     }
     @RequestMapping("/cart")
@@ -52,7 +54,7 @@ public class UserController {
     public String index(Model model,HttpSession session){
         UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
         session.setAttribute("userCustomer",userCustomer);
-        return "index";
+        return "initIndex";
     }
     @RequestMapping("/list")
     public String list(Model model,HttpSession session){
@@ -157,7 +159,7 @@ public class UserController {
     @RequestMapping("/logout")
     public String logout(HttpSession session){
         session.invalidate();
-        return "index";
+        return "initIndex";
     }
 
 }

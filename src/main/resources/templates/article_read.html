@@ -20,10 +20,10 @@ Author URI: http://www.deathghost.cn
 <header>
  <section class="Topmenubg">
   <div class="Topnav">
-   <div class="LeftNav" th:if="${session.userCustomer.userName == null}">
-    <a href="register.html">注册</a>/<a href="login.html">登录</a><a href="#">QQ客服</a><a href="#">微信客服</a><a href="#">手机客户端</a>
+   <div class="LeftNav" th:if="${session.userCustomer == null}">
+    <a href="/register">注册</a>/<a href="/login">登录</a><a href="#">QQ客服</a><a href="#">微信客服</a><a href="#">手机客户端</a>
    </div>
-   <div class="LeftNav" th:if="${session.userCustomer != null}" hidden="hidden">
+   <div class="LeftNav" th:if="${session.userCustomer != null}">
     <a href="/account" th:text="${session.userCustomer.userName}"></a>/<a href="/logout">注销</a><a href="#">QQ客服</a><a href="#">微信客服</a><a href="#">手机客户端</a>
    </div>
    <div class="RightNav">
@@ -143,6 +143,6 @@ Author URI: http://www.deathghost.cn
   </section>
  </section>
 <div class="copyright">© 版权所有 2016 DeathGhost 技术支持：<a href="http://www.deathghost.cn" title="DeathGhost">DeathGhost</a></div>
-</footer>>
+</footer>
 </body>
 </html>

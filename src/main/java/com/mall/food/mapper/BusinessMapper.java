@@ -10,14 +10,21 @@ import java.util.List;
 @Repository
 @Mapper
 public interface BusinessMapper {
+    @Select("select * from business where b_id in (select b_id from commodity where type=#{commodityType} )")
+    public List<Business> selectByCommodityType(String commodityType);
+
     @Select("select * from business where b_id=#{bId}")
     public Business selectBusinessById(String bId);
 
     @Select("select * from business")
     public List<Business> selectAll();
 
-    @Insert("insert into business(b_id,b_name,password,b_tel,b_email,b_key,boss_name,age,sex,address,balance,b_picture,b_logo,b_delivery)" +
-            "values(#{bId},#{bName},#{password},#{bTel},#{bEmail},#{key},#{bossName},#{age},#{sex},#{address},#{balance},#{bPicture},#{bLogo},#{bDelivery})")
+    @Select("select * from business limit #{number}")
+    public List<Business> selectByLimit(Integer number);
+
+
+    @Insert("insert into business(b_id,b_name,password,b_tel,b_email,key,boss_name,age,sex,address,balance,b_picture,b_logo)" +
+            "values(#{bId},#{bName},#{password},#{bTel},#{bEmail},#{key},#{bossName},#{age},#{sex},#{address},#{balance},#{bPicture},#{bLogo}")
     public void insert(Business business);
 
     @Delete("delete business where b_id=#{bId}")
