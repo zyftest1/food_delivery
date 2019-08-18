@@ -1,7 +1,7 @@
 package com.mall.food.controller;
 
 import com.mall.food.pojo.CommodityType;
-import com.mall.food.service.frontCommodityService.impl.CommodityServiceImpl;
+import com.mall.food.service.commodityService.impl.CommodityServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +14,10 @@ import java.util.List;
 public class CommodityController {
     @Autowired
     CommodityServiceImpl commodityService;
-    @RequestMapping("/shoplist.do")
+    @RequestMapping("/index.do")
     public String initPageShopList(Model model){
         List<CommodityType> commodityTypeList = commodityService.selectAllCommodityType();
         model.addAttribute("commodityTypes",commodityTypeList);
-        return "shop_list";
+        return "index";
     }
 }

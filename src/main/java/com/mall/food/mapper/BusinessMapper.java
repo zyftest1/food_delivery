@@ -10,6 +10,9 @@ import java.util.List;
 @Repository
 @Mapper
 public interface BusinessMapper {
+    @Select("select * from business where b_id in (select b_id from commodity where type=#{commodityType} )")
+    public List<Business> selectByCommodityType(String commodityType);
+
     @Select("select * from business where b_id=#{bId}")
     public Business selectBusinessById(String bId);
 
