@@ -67,7 +67,7 @@
         <ul class="rslides f426x240">
             <li th:each="advertisement : ${advertisements}">
                 <a href="javascript:">
-                <img th:src="${advertisement.picture}" style="height:403px;width:600px">
+                    <img th:src="${advertisement.picture}" style="height:403px;width:600px">
                 </a>
             </li>
         </ul>
@@ -100,58 +100,13 @@
                 <ul style="display:block;">
                     <li>
                         <div class="SCcontent">
-                            <a href="detailsp.html" target="_blank" title="菜品名称">
+                            <a href="detailsp.html" target="_blank" title="菜品名称" th:each="commodity : ${commoditys}">
                                 <figure>
-                                    <img src="upload\05.jpg">
+                                    <img th:src="${commodity.picture}">
                                     <figcaption>
-                                        <span class="title">老李家的糖醋鲤鱼</span>
-                                        <span class="price"><i>￥</i>169.00</span>
+                                        <span class="title" th:text="${commodity.comName}"></span>
+                                        <span class="price" th:text="${commodity.price}"></span>元
                                     </figcaption>
-                                </figure>
-                            </a>
-                            <a href="detailsp.html" target="_blank" title="菜品名称">
-                                <figure>
-                                    <img src="upload\04.jpg">
-                                    <figcaption>
-                                        <span class="title">老李家的糖醋鲤鱼</span>
-                                        <span class="price"><i>￥</i>169.00</span>
-                                    </figcaption>
-                                </figure>
-                            </a>
-                            <a href="detailsp.html" target="_blank" title="菜品名称">
-                                <figure>
-                                    <img src="upload\06.jpg">
-                                    <figcaption>
-                                        <span class="title">老李家的糖醋鲤鱼</span>
-                                        <span class="price"><i>￥</i>169.00</span>
-                                    </figcaption>
-                                </figure>
-                            </a>
-                        </div>
-                        <div class="bestshop">
-                            <a href="shop.html" target="_blank" title="店铺名称">
-                                <figure>
-                                    <img src="upload\wpjnewlogo.jpg">
-                                </figure>
-                            </a>
-                            <a href="shop.html" target="_blank" title="店铺名称">
-                                <figure>
-                                    <img src="upload\weijia.jpg">
-                                </figure>
-                            </a>
-                            <a href="shop.html" target="_blank" title="店铺名称">
-                                <figure>
-                                    <img src="upload\wpjnewlogo.jpg">
-                                </figure>
-                            </a>
-                            <a href="shop.html" target="_blank" title="店铺名称">
-                                <figure>
-                                    <img src="upload\weijia.jpg">
-                                </figure>
-                            </a>
-                            <a href="shop.html" target="_blank" title="店铺名称">
-                                <figure>
-                                    <img src="upload\wpjnewlogo.jpg">
                                 </figure>
                             </a>
                         </div>
@@ -160,61 +115,10 @@
                 <ul>
                     <li>
                         <div class="DCcontent">
-                            <a href="shop.html" target="_blank" title="TITLE:店名">
+                            <a href="shop.html" target="_blank" title="TITLE:店名" th:each="store : ${businesss}">
                                 <figure>
-                                    <img src="upload\cc.jpg">
-                                    <figcaption>
-                                        <span class="title">老重庆川菜馆</span>
-                                        <span class="price">预定折扣：<i>8.9折</i></span>
-                                    </figcaption>
-                                    <p class="p1"><q>仅售169元！价值289元的4-5人餐，提供免费WiFi。</q></p>
-                                    <p class="p2">
-                                        店铺评分：
-                                        <img src="images\star-on.png">
-                                        <img src="images\star-on.png">
-                                        <img src="images\star-on.png">
-                                        <img src="images\star-on.png">
-                                        <img src="images\star-off.png">
-                                    </p>
-                                    <p class="p3">店铺地址：西安市雁塔区丈八路***老重庆川菜馆...</p>
-                                </figure>
-                            </a>
-                            <a href="shop.html" target="_blank" title="TITLE:店名">
-                                <figure>
-                                    <img src="upload\cc.jpg">
-                                    <figcaption>
-                                        <span class="title">老重庆川菜馆</span>
-                                        <span class="price">预定折扣：<i>8.9折</i></span>
-                                    </figcaption>
-                                    <p class="p1"><q>仅售169元！价值289元的4-5人餐，提供免费WiFi。</q></p>
-                                    <p class="p2">
-                                        店铺评分：
-                                        <img src="images\star-on.png">
-                                        <img src="images\star-on.png">
-                                        <img src="images\star-on.png">
-                                        <img src="images\star-on.png">
-                                        <img src="images\star-off.png">
-                                    </p>
-                                    <p class="p3">店铺地址：西安市雁塔区丈八路***老重庆川菜馆...</p>
-                                </figure>
-                            </a>
-                            <a href="shop.html" target="_blank" title="TITLE:店名">
-                                <figure>
-                                    <img src="upload\cc.jpg">
-                                    <figcaption>
-                                        <span class="title">老重庆川菜馆</span>
-                                        <span class="price">预定折扣：<i>8.9折</i></span>
-                                    </figcaption>
-                                    <p class="p1"><q>仅售169元！价值289元的4-5人餐，提供免费WiFi。</q></p>
-                                    <p class="p2">
-                                        店铺评分：
-                                        <img src="images\star-on.png">
-                                        <img src="images\star-on.png">
-                                        <img src="images\star-on.png">
-                                        <img src="images\star-on.png">
-                                        <img src="images\star-off.png">
-                                    </p>
-                                    <p class="p3">店铺地址：西安市雁塔区丈八路***老重庆川菜馆...</p>
+                                    <img th:src="${store.bPicture}">
+                                    <span class="title" th:text="${store.bName}">店名</span>
                                 </figure>
                             </a>
                         </div>

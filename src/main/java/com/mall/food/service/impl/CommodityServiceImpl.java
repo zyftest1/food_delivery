@@ -1,10 +1,10 @@
-package com.mall.food.service.commodityService.impl;
+package com.mall.food.service.impl;
 
 import com.mall.food.mapper.CommodityMapper;
 import com.mall.food.mapper.CommodityTypeMapper;
 import com.mall.food.pojo.Commodity;
 import com.mall.food.pojo.CommodityType;
-import com.mall.food.service.commodityService.ICommodityService;
+import com.mall.food.service.ICommodityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +31,12 @@ public class CommodityServiceImpl implements ICommodityService {
     @Override
     public List<Commodity> selectByTypeCommodity(String commodityType) {
         List<Commodity> commodityList = commodityMapper.selectByType(commodityType);
+        return commodityList;
+    }
+
+    @Override
+    public List<Commodity> selectForIndexCommodity(Integer number) {
+        List<Commodity> commodityList = commodityMapper.selectByLimit(number);
         return commodityList;
     }
 }

@@ -16,4 +16,7 @@ public interface CommodityMapper {
     public List<Commodity> selectByType(String commodityType);
     @Select("select * from commodity where comId = #{commodityId}")
     public Commodity selectById(Integer commodityId);
+    @Select("select * from commodity limit #{number}")
+    public List<Commodity> selectByLimit(Integer number);
+
 }

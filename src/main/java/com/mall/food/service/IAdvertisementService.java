@@ -1,4 +1,4 @@
-package com.mall.food.service.advertisementService;
+package com.mall.food.service;
 
 import com.mall.food.pojo.Advertisement;
 

@@ -1,8 +1,8 @@
-package com.mall.food.service.advertisementService.impl;
+package com.mall.food.service.impl;
 
 import com.mall.food.mapper.AdvertisementMapper;
 import com.mall.food.pojo.Advertisement;
-import com.mall.food.service.advertisementService.IAdvertisementService;
+import com.mall.food.service.IAdvertisementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

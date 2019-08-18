@@ -19,6 +19,10 @@ public interface BusinessMapper {
     @Select("select * from business")
     public List<Business> selectAll();
 
+    @Select("select * from business limit #{number}")
+    public List<Business> selectByLimit(Integer number);
+
+
     @Insert("insert into business(b_id,b_name,password,b_tel,b_email,key,boss_name,age,sex,address,balance,b_picture,b_logo)" +
             "values(#{bId},#{bName},#{password},#{bTel},#{bEmail},#{key},#{bossName},#{age},#{sex},#{address},#{balance},#{bPicture},#{bLogo}")
     public void insert(Business business);
