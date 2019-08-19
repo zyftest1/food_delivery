@@ -10,10 +10,7 @@
 <script type="text/javascript" src="js\public.js"></script>
 <script type="text/javascript" src="js\jquery.js"></script>
 <script type="text/javascript" src="js\jqpublic.js"></script>
-<!--
-Author: DeathGhost
-Author URI: http://www.deathghost.cn
--->
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
 <header>
@@ -77,83 +74,45 @@ Author URI: http://www.deathghost.cn
   <!--user Address-->
   <section class="Myaddress Overflow">
    <span class="MDtitle Font14 FontW Block Lineheight35">收货人信息</span>
-   <form action="#">
-   <table>
-    <tr>
-     <td width="30%" class="Font14 FontW Lineheight35" align="right">选择所在地：</td>
-     <td>
-     <select name="" class="select_ssq">
-      <option>陕西省</option>
-     </select>
-     <select name="" class="select_ssq">
-     <option>西安市</option>
-     </select>
-     <select name="" class="select_ssq">
-     <option>莲湖区</option>
-     </select>
-     </td>
-    </tr>
-    <tr>
-     <td width="30%" class="Font14 FontW Lineheight35" align="right">收件人姓名：</td>
-     <td><input type="text" name="" required="" value="DeathGhost" class="input_name"></td>
-    </tr>
-    <tr>
-     <td width="30%" class="Font14 FontW Lineheight35" align="right">街道地址：</td>
-     <td><input type="text" required="" size="50" value="丈八路144号" class="input_addr"></td>
-    </tr>
-    <tr>
-     <td width="30%" class="Font14 FontW Lineheight35" align="right">邮政编码：</td>
-     <td><input type="text" required="" size="10" pattern="[0-9]{6}" value="727444" class="input_zipcode"></td>
-    </tr>
-    <tr>
-     <td width="30%" class="Font14 FontW Lineheight35" align="right">手机号码：</td>
-     <td><input type="text" name="" required="" pattern="[0-9]{11}" value="18309275673" class="input_tel"></td>
-    </tr>
-    <tr>
-     <td align="right" width="30%" class="Font14 FontW Lineheight35"></td>
-     <td class="Lineheight35"><input name="" type="submit" value="确认修改" class="Submit"><input name="" type="submit" value="删除" class="Submit"></td>
-    </tr>
-   </table>
-   </form>
-   <!--add new address-->
-   <form action="#">
-    <table style="margin-top:10px;">
-    <tr>
-     <td width="30%" class="Font14 FontW Lineheight35" align="right">选择所在地：</td>
-     <td>
-     <select name="" class="select_ssq">
-      <option>陕西省</option>
-     </select>
-     <select name="" class="select_ssq">
-     <option>西安市</option>
-     </select>
-     <select name="" class="select_ssq">
-     <option>莲湖区</option>
-     </select>
-     </td>
-    </tr>
-    <tr>
-     <td width="30%" class="Font14 FontW Lineheight35" align="right">收件人姓名：</td>
-     <td><input type="text" name="" required="" class="input_name"></td>
-    </tr>
-    <tr>
-     <td width="30%" class="Font14 FontW Lineheight35" align="right">街道地址：</td>
-     <td><input type="text" required="" class="input_addr"></td>
-    </tr>
-    <tr>
-     <td width="30%" class="Font14 FontW Lineheight35" align="right">邮政编码：</td>
-     <td><input type="text" required="" pattern="[0-9]{6}" class="input_zipcode"></td>
-    </tr>
-    <tr>
-     <td width="30%" class="Font14 FontW Lineheight35" align="right">手机号码：</td>
-     <td><input type="text" name="" required="" pattern="[0-9]{11}" class="input_tel"></td>
-    </tr>
-    <tr>
-     <td width="30%" class="Font14 FontW Lineheight35" align="right"></td>
-     <td class="Font14 Font Lineheight35"><input name="" type="submit" value="新增收货地址" class="Submit"></td>
-    </tr>
-   </table>
-   </form>
+    <a href="javascript:void(0)" onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"><img src="images\newaddress.png"></a>
+    <form method="post" action="">
+     <table class="table table-hover" border="1px" >
+      <thead>
+      <tr>
+       <th><p align="center">地址</p></th>
+       <th><p align="center">姓名</p></th>
+       <th><p align="center">电话</p></th>
+       <th colspan="2"><p align="center">操作</p></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="userAddress:${userAddressList}">
+       <td th:text="${userAddress.getAddress()}" align="center"></td>
+       <td th:text="${userAddress.getName()}" align="center"></td>
+       <td th:text="${userAddress.getTel()}" align="center"></td>
+       <td align="center"><a href="" >修改</a></td>
+       <td align="center"><a href="/" >删除</a></td>
+      </tr>
+      </tbody>
+     </table>
+    </form>
+   <div class="confirm_addr_f">
+    <!--add new address-->
+    <form action="#">
+     <div id="light" class="O-L-content">
+      <ul>
+       <li><span><label for="">选择所在地：</label></span><p><em>*</em><select name=""><option>陕西省</option></select> <select name=""><option>西安市</option></select> <select name=""><option>雁塔区</option></select></p></li>
+       <li><span><label for="">邮政编码：</label></span><p><em>*</em><input name="" type="text" class="Y_N" pattern="[0-9]{6}" required=""></p></li>
+       <li><span><label for="">街道地址：</label></span><p><em>*</em><textarea name="" cols="80" rows="5"></textarea></p></li>
+       <li><span><label for="">收件人姓名：</label></span><p><em>*</em><input name="" type="text"></p></li>
+       <li><span><label for="">手机号码：</label></span><p><em>*</em><input name="" type="text" pattern="[0-9]{11}" required=""></p></li>
+       <div class="button-a"><input type="button" value="确 定" class="C-button"><a href="javascript:void(0)" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"><span><input name="" type="button" value="取 消" class="Cancel-b"></span></a></div>
+       <div class="close-botton"><a href="javascript:void(0)" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"></a></div>
+      </ul></div>
+     <div id="fade" class="overlay"></div>
+     <!--End add new address-->
+    </form>
+   </div>
   </section>
  </article>
 </section>

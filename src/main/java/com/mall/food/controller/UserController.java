@@ -1,6 +1,8 @@
 package com.mall.food.controller;
 
+import com.mall.food.pojo.UserAddress;
 import com.mall.food.pojo.UserCustomer;
+import com.mall.food.service.UserAddressService;
 import com.mall.food.service.UserCustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,9 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserCustomerService userCustomerService;
+
+    @Autowired
+    private UserAddressService userAddressService;
 
     @RequestMapping("/read")
     public String read(Model model,HttpSession session){
@@ -146,12 +151,16 @@ public class UserController {
     public String address(Model model,HttpSession session){
         UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
         session.setAttribute("userCustomer",userCustomer);
+        List<UserAddress> userAddressList = userAddressService.getAll(userCustomer.getUserId());
+        model.addAttribute("userAddressList",userAddressList);
         return "user_address";
     }
     @RequestMapping("/center")
     public String center(Model model,HttpSession session){
-        UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
-        session.setAttribute("userCustomer",userCustomer);
+        if (session.getAttribute("userCustomer") != null){
+            UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
+            session.setAttribute("userCustomer",userCustomer);
+        }
         return "user_center";
     }
     @RequestMapping("/coupon")

@@ -13,8 +13,8 @@ public interface UserAddressMapper {
     @Select("select * from user_address where add_id = #{addId}")
     public UserAddress selectUserAddressById(Integer addId);
 
-    @Select("select * from user_address")
-    public List<UserAddress> selectAll();
+    @Select("select * from user_address where user_id = #{userId}")
+    public List<UserAddress> selectAll(String userId);
 
     @Insert("insert into user_address(user_id,address,name,tel) values(#{userId},#{address},#{name},#{tel}) ")
     public void insertUserAddress(UserAddress userAddress);
