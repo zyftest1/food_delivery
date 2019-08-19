@@ -7,13 +7,18 @@ import com.mall.food.service.UserCustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class UserController {
@@ -69,6 +74,13 @@ public class UserController {
     }
     @RequestMapping("/login")
     public String userLogin(Model model, String userName, String password, HttpSession session){
+        UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
+        session.setAttribute("userCustomer",userCustomer);
+        return "login";
+    }
+
+    @RequestMapping("/loginUser")
+    public String loginUser(Model model, String userName, String password, HttpSession session){
         if (!StringUtils.isEmpty(userName)&& !StringUtils.isEmpty(password)){
             UserCustomer userCustomer = userCustomerService.getUserCustomreByName(userName);
             if (userCustomer == null){
@@ -88,24 +100,31 @@ public class UserController {
         }
     }
 
-    @RequestMapping("/register1")
-    public String confirmUserName(Model model,String userName,String password,String password2,String email,String tel,String captcha){
+
+    @RequestMapping(value = "/confirmUserName",method = RequestMethod.POST)
+    @ResponseBody
+    private Object confirmUserName(Model model,String userName,String password,String password2){
         List<UserCustomer> userCustomerList = userCustomerService.getAll();
+        Map<String, String> map = new HashMap<>();
         for (UserCustomer userCustomer : userCustomerList) {
             if (userCustomer.getUserName().equals(userName)) {
-                model.addAttribute("msg", "用户名被占用");
-                return "register";
+                map.put("msg","用户名不可用");
+                return map;
             }
         }
+        map.put("msg","用户名可用");
+        return map;
+    }
+
+    @RequestMapping(value = "/registerUser")
+    private String registerUser(Model model,String userName,String password,String password2,String email,String tel,String captcha){
         if (!password.equals(password2)) {
             model.addAttribute("msg2", "密码不相等,请重新输入");
             return "register";
         }
-
         UserCustomer userCustomer = UserCustomer.builder().userId(tel).userName(userName).password(password).email(email).tel(tel).userKey("123456").balance(new BigDecimal(0.00)).member(0).build();
         userCustomerService.insert(userCustomer);
-        //        model.addAttribute("msg1","用户名可用");
-        return "login";
+        return "register";
     }
     @RequestMapping("/register")
     public String register(Model model,HttpSession session){
@@ -155,6 +174,25 @@ public class UserController {
         model.addAttribute("userAddressList",userAddressList);
         return "user_address";
     }
+    @RequestMapping("/pro")
+    public String province(Model model,HttpSession session){
+        UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
+        session.setAttribute("userCustomer",userCustomer);
+        return "user_address";
+    }
+    @RequestMapping("/area")
+    public String area(Model model,HttpSession session){
+        UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
+        session.setAttribute("userCustomer",userCustomer);
+        return "user_coupon";
+    }
+    @RequestMapping("/city")
+    public String city(Model model,HttpSession session){
+        UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
+        session.setAttribute("userCustomer",userCustomer);
+        return "user_coupon";
+    }
+
     @RequestMapping("/center")
     public String center(Model model,HttpSession session){
         if (session.getAttribute("userCustomer") != null){

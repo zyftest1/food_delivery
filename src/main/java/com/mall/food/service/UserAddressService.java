@@ -12,6 +12,7 @@ public class UserAddressService {
     @Autowired
     private UserAddressMapper userAddressMapper;
 
+
     public List<UserAddress> getAll(String userId){
         List<UserAddress> userAddressList = userAddressMapper.selectAll(userId);
         return userAddressList;

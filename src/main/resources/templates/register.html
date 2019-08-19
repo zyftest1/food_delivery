@@ -11,38 +11,38 @@
 <script type="text/javascript" src="js\jquery.js"></script>
 <script type="text/javascript" src="js\jqpublic.js"></script>
  <script type="text/javascript" src="webjars/jquery/3.4.1/jquery.js"></script>
-<!-- <style type="text/css">-->
-<!--  .enable{-->
-<!--   color: green;-->
-<!--  }-->
-<!--  .disable{-->
-<!--   color: red;-->
-<!--  }-->
-<!-- </style>-->
-<!-- <script type="text/javascript">-->
-<!--  $(function () {-->
-<!--   $("#userName").blur(function () {-->
-<!--    var userName = $("#userName").val();-->
-<!--    // alert(userName)-->
-<!--    // $("#userName")是id选择器,获得id为userName的标签,通过.val(),获得这个标签的value的值,赋值给你声明的变量-->
-<!--    $.post({-->
-<!--     url:"/confirm?userName="+userName,-->
-<!--     data:{userName:userName},-->
-<!--     dataType:'text',-->
-<!--     success:function (data) {-->
-<!--      alert(data)-->
-<!--      if(data == "用户名可用"){-->
-<!--       $("#msg").removeClass().addClass("enable");-->
-<!--       $("#msg").text(data);-->
-<!--      }else {-->
-<!--       $("#msg").removeClass().addClass("disable");-->
-<!--       $("#msg").text(data);-->
-<!--      }-->
-<!--     }-->
-<!--    })-->
-<!--   })-->
-<!--  });-->
-<!-- </script>-->
+ <style type="text/css">
+  .enable{
+   color: green;
+  }
+  .disable{
+   color: red;
+  }
+ </style>
+ <script type="text/javascript">
+  $(function () {
+   $("#userName").blur(function () {
+    var userName = $("#userName").val();
+    // alert(userName)
+    // $("#userName")是id选择器,获得id为userName的标签,通过.val(),获得这个标签的value的值,赋值给你声明的变量
+    $.ajax({
+     url:"/confirmUserName",
+     type:"POST",
+     dataType:"json",
+     data:{userName:userName},
+     success:function (data) {
+      if(data.msg == "用户名可用"){
+       $("#msg").removeClass().addClass("enable");
+       $("#msg").text(data.msg);
+      }else {
+       $("#msg").removeClass().addClass("disable");
+       $("#msg").text(data.msg);
+      }
+     }
+    })
+   })
+  });
+ </script>
 </head>
 <body>
 <header>
@@ -90,22 +90,22 @@
 </header>
 <!--Start content-->
 <section class="Psection MT20">
- <form action="/register1">
+ <form action="/registerUser">
   <table class="Register">
   <tr>
   <td width="40%" align="right" class="FontW" na>用户名：</td>
-  <td><input type="text" id="userName" name="userName" autofocus="">
-   <div style="color: red" th:text="${msg}"></div>
-   <div style="green: #33ff27" th:text="${msg1}"></div>
+  <td><input type="text" id="userName" name="userName">
+   <span id="msg"></span>
   </td>
   </tr>
   <tr>
   <td width="40%" align="right" class="FontW">密码：</td>
-  <td><input type="password" name="password" required=""></td>
+  <td><input type="password" name="password" required="" id="password"></td>
   </tr>
   <tr>
   <td width="40%" align="right" class="FontW">再次确认：</td>
-  <td><input type="password" name="password2" required=""></td>
+  <td><input type="password" name="password2" required="" id="password2">
+   <span th:text="${msg2}"></span></td>
   </tr>
   <tr>
   <td width="40%" align="right" class="FontW">电子邮件：</td>
