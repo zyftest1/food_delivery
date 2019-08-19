@@ -1,10 +1,12 @@
 package com.mall.food.pojo;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
 
 @Data
+@Builder
 public class Business {
     private String bId;
     private String bName;
@@ -19,5 +21,6 @@ public class Business {
     private BigDecimal balance;
     private String bPicture;
     private String bLogo;
+    private BigDecimal bDelivery;
 
 }

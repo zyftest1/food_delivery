@@ -3,36 +3,23 @@
 <head>
     <meta charset="utf-8">
     <title>主界面</title>
-    <link href="style\style.css" rel="stylesheet" type="text/css" th:href="@{style/style.css}">
-    <script type="text/javascript" src="js\public.js" th:href="@{js/public.js}"></script>
-    <script type="text/javascript" src="js\jquery.js" th:href="@{js/jquery.js}"></script>
-    <script type="text/javascript" src="js\jqpublic.js" th:href="@{js/jqpublic.js}"></script>
-    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css"
-          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
+    <link href="style\style.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js\public.js"></script>
+    <script type="text/javascript" src="js\jquery.js"></script>
+    <script type="text/javascript" src="js\jqpublic.js"></script>
 </head>
 <body>
 <header>
     <section class="Topmenubg">
         <div class="Topnav">
-            <div class="LeftNav">
-                <a href="register.html">注册</a>/<a href="login.html">登录</a>
+            <div class="LeftNav" th:if="${session.userCustomer == null}">
+                <a href="/register">注册</a>/<a href="/login">登录</a><a href="#">QQ客服</a><a href="#">微信客服</a><a href="#">手机客户端</a>
+            </div>
+            <div class="LeftNav" th:if="${session.userCustomer != null}">
+                <a href="/account" th:text="${session.userCustomer.userName}"></a>/<a href="/logout">注销</a><a href="#">QQ客服</a><a href="#">微信客服</a><a href="#">手机客户端</a>
             </div>
             <div class="RightNav">
-                <a href="user_center.html">用户中心</a>
-                <a href="user_orderlist.html" target="_blank" title="我的订单">我的订单</a>
-                <a href="cart.html">购物车（0）</a>
-                <a href="user_favorites.html" target="_blank" title="我的收藏">我的收藏</a>
-                <a href="#">商家入驻</a>
+                <a href="/center">用户中心</a> <a href="/orderlist" target="_blank" title="我的订单">我的订单</a> <a href="/cart">购物车（0）</a> <a href="/favorites" target="_blank" title="我的收藏">我的收藏</a> <a href="#">商家入驻</a>
             </div>
         </div>
     </section>
@@ -57,10 +44,10 @@
     </div>
     <nav class="menu_bg">
         <ul class="menu">
-            <li><a href="index.html">首页</a></li>
-            <li><a href="list.html">订餐</a></li>
-            <li><a href="category.html">积分商城</a></li>
-            <li><a href="article_read.html">关于我们</a></li>
+            <li><a href="/index">首页</a></li>
+            <li><a href="/list">订餐</a></li>
+            <li><a href="/category">积分商城</a></li>
+            <li><a href="/read">关于我们</a></li>
         </ul>
     </nav>
 </header>
@@ -106,15 +93,15 @@
                 <li class="current">点菜</li>
                 <li>餐馆</li>
                 <p class="class_B">
-                    <button type="button" class="btn btn-success commodityType" th:each="types : ${commodityTypes}"
-                            th:value="${types.type}" th:text="${types.type}" th:id=""></button>
+                    <a href="#" th:each="types : ${commodityTypes}" th:text="${types.type}"></a>
                 </p>
             </ul>
+
             <div id="Indexcontent">
                 <ul style="display:block;">
                     <li>
                         <div class="SCcontent">
-                            <a href="detailsp.html" target="_blank" title="菜品名称" th:each="commodity : ${commoditys}">
+                            <a href="/detailsp?id="+${commodity.comId} target="_blank" title="菜品名称" th:each="commodity : ${commoditys}">
                                 <figure>
                                     <img th:src="${commodity.picture}">
                                     <figcaption>
@@ -133,10 +120,7 @@
                                 <figure>
                                     <img th:src="${store.bPicture}">
                                     <span class="title" th:text="${store.bName}">店名</span>
-                                    <h4>地址:</h4>
-                                    <P class="p3">[[${store.address}]]</P>
                                 </figure>
-
                             </a>
                         </div>
                     </li>
@@ -164,13 +148,58 @@
                     <img src="upload\02.jpg">
                     用户“DeathGhost”对[ 魏家凉皮 ]“酸辣土豆丝”评说：味道挺不错，送餐速度挺快...
                 </li>
-                <li>
-                    <img src="upload\02.jpg">
-                    用户“DeathGhost”对[ 魏家凉皮 ]“酸辣土豆丝”评说：味道挺不错，送餐速度挺快...
-                </li>
+
             </ul>
         </div>
     </aside>
 </section>
+<footer>
+    <section class="Otherlink">
+        <aside>
+            <div class="ewm-left">
+                <p>手机扫描二维码：</p>
+                <img src="images\Android_ico_d.gif">
+                <img src="images\iphone_ico_d.gif">
+            </div>
+            <div class="tips">
+                <p>客服热线</p>
+                <p><i>1830927**73</i></p>
+                <p>配送时间</p>
+                <p><time>09：00</time>~<time>22:00</time></p>
+                <p>网站公告</p>
+            </div>
+        </aside>
+        <section>
+            <div>
+                <span><i class="i1"></i>配送支付</span>
+                <ul>
+                    <li><a href="/read" target="_blank" title="标题">支付方式</a></li>
+                    <li><a href="/read" target="_blank" title="标题">配送方式</a></li>
+                    <li><a href="/read" target="_blank" title="标题">配送效率</a></li>
+                    <li><a href="/read" target="_blank" title="标题">服务费用</a></li>
+                </ul>
+            </div>
+            <div>
+                <span><i class="i2"></i>关于我们</span>
+                <ul>
+                    <li><a href="/read" target="_blank" title="标题">招贤纳士</a></li>
+                    <li><a href="/read" target="_blank" title="标题">网站介绍</a></li>
+                    <li><a href="/read" target="_blank" title="标题">配送效率</a></li>
+                    <li><a href="/read" target="_blank" title="标题">商家加盟</a></li>
+                </ul>
+            </div>
+            <div>
+                <span><i class="i3"></i>帮助中心</span>
+                <ul>
+                    <li><a href="/read" target="_blank" title="标题">服务内容</a></li>
+                    <li><a href="/read" target="_blank" title="标题">服务介绍</a></li>
+                    <li><a href="/read" target="_blank" title="标题">常见问题</a></li>
+                    <li><a href="/read" target="_blank" title="标题">网站地图</a></li>
+                </ul>
+            </div>
+        </section>
+    </section>
+    <div class="copyright">© 版权所有 2016 DeathGhost 技术支持：<a href="http://www.deathghost.cn" title="DeathGhost">DeathGhost</a></div>
+</footer>
 </body>
 </html>

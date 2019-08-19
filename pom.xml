@@ -85,7 +85,31 @@
             <artifactId>lombok</artifactId>
             <version>1.18.8</version>
         </dependency>
-
+        <!--            前端-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>3.4.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>4.3.1</version>
+        </dependency>
+        <!--            //验证码-->
+        <!-- https://mvnrepository.com/artifact/com.github.whvcse/EasyCaptcha -->
+        <dependency>
+            <groupId>com.github.whvcse</groupId>
+            <artifactId>EasyCaptcha</artifactId>
+            <version>1.5.0</version>
+        </dependency>
+        <!-- fastjson Json处理工具包 -->
+        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.58</version>
+        </dependency>
     </dependencies>
 
     <build>
