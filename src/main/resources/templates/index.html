@@ -7,6 +7,18 @@
     <script type="text/javascript" src="js\public.js" th:href="@{js/public.js}"></script>
     <script type="text/javascript" src="js\jquery.js" th:href="@{js/jquery.js}"></script>
     <script type="text/javascript" src="js\jqpublic.js" th:href="@{js/jqpublic.js}"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
 </head>
 <body>
 <header>
@@ -16,9 +28,11 @@
                 <a href="register.html">注册</a>/<a href="login.html">登录</a>
             </div>
             <div class="RightNav">
-                <a href="user_center.html">用户中心</a> <a href="user_orderlist.html" target="_blank" title="我的订单">我的订单</a>
-                <a href="cart.html">购物车（0）</a> <a href="user_favorites.html" target="_blank" title="我的收藏">我的收藏</a> <a
-                    href="#">商家入驻</a>
+                <a href="user_center.html">用户中心</a>
+                <a href="user_orderlist.html" target="_blank" title="我的订单">我的订单</a>
+                <a href="cart.html">购物车（0）</a>
+                <a href="user_favorites.html" target="_blank" title="我的收藏">我的收藏</a>
+                <a href="#">商家入驻</a>
             </div>
         </div>
     </section>
@@ -92,10 +106,10 @@
                 <li class="current">点菜</li>
                 <li>餐馆</li>
                 <p class="class_B">
-                    <a href="#" th:each="types : ${commodityTypes}" th:text="${types.type}"></a>
+                    <button type="button" class="btn btn-success commodityType" th:each="types : ${commodityTypes}"
+                            th:value="${types.type}" th:text="${types.type}" th:id=""></button>
                 </p>
             </ul>
-
             <div id="Indexcontent">
                 <ul style="display:block;">
                     <li>
@@ -119,7 +133,10 @@
                                 <figure>
                                     <img th:src="${store.bPicture}">
                                     <span class="title" th:text="${store.bName}">店名</span>
+                                    <h4>地址:</h4>
+                                    <P class="p3">[[${store.address}]]</P>
                                 </figure>
+
                             </a>
                         </div>
                     </li>
@@ -147,7 +164,10 @@
                     <img src="upload\02.jpg">
                     用户“DeathGhost”对[ 魏家凉皮 ]“酸辣土豆丝”评说：味道挺不错，送餐速度挺快...
                 </li>
-
+                <li>
+                    <img src="upload\02.jpg">
+                    用户“DeathGhost”对[ 魏家凉皮 ]“酸辣土豆丝”评说：味道挺不错，送餐速度挺快...
+                </li>
             </ul>
         </div>
     </aside>
