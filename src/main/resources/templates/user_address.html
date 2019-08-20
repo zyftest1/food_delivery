@@ -10,50 +10,87 @@
 <script type="text/javascript" src="js\public.js"></script>
 <script type="text/javascript" src="js\jquery.js"></script>
 <script type="text/javascript" src="js\jqpublic.js"></script>
+ <script type="text/javascript" src="webjars/jquery/3.4.1/jquery.js"></script>
  <script type="text/javascript">
-  $(function(){
-   $.post({
-    url:"/pro",
-    success:function (data) {
-     var pList =  JSON.parse(data);
-     var pSelect = $("#province");
-     for(var i = 0 ; i < pList.length;i++){
-      pSelect.append(" <option value='"+pList[i].provinceid+"'>"+pList[i].province+"</option>")
+  function province(){
+   $(function(){
+    document.getElementById('light').style.display='block';
+    document.getElementById('fade').style.display='block';
+    $.ajax({
+     url:"/pro",
+     type:"POST",
+     success:function (data) {
+      var pList =  JSON.parse(data);
+      var pSelect = $("#province");
+      for(var i = 0 ; i < pList.length;i++){
+       pSelect.append(" <option value='"+pList[i].provinceId+"'>"+pList[i].province+"</option>")
+      }
      }
-    }
+    })
    })
-  })
-
+  }
   function selectCity() {
-   var pid = $("#province").val();
-   $.post({
+   var provinceId = $("#province").val();
+   // alert(provinceId)
+   $.ajax({
     url:"/city",
-    data:{pid:pid},
+    type:"POST",
+    data:{provinceId:provinceId},
     success:function (data) {
      var cList =  JSON.parse(data);
      var cSelect = $("#city");
      cSelect.empty();
      for(var i = 0 ; i < cList.length;i++){
-      cSelect.append(" <option value='"+cList[i].cityid+"'>"+cList[i].city+"</option>")
+      cSelect.append(" <option value='"+cList[i].cityId+"'>"+cList[i].city+"</option>")
      }
     }
    })
   }
 
   function selectArea() {
-   var cid = $("#city").val();
-   $.post({
+   var cityId = $("#city").val();
+   // alert(cityId);
+   $.ajax({
     url:"/area",
-    data:{cid:cid},
+    type:"POST",
+    data:{cityId:cityId},
     success:function (data) {
      var aList =  JSON.parse(data);
      var aSelect = $("#area");
      aSelect.empty();
      for(var i = 0 ; i < aList.length;i++){
-      aSelect.append(" <option value='"+aList[i].areaid+"'>"+aList[i].area+"</option>")
+      aSelect.append(" <option value='"+aList[i].areaId+"'>"+aList[i].area+"</option>")
      }
     }
    })
+  }
+ </script>
+ <script type="text/javascript">
+  function updateAddress(addId) {
+   $(function () {
+    // var addId = $("#addId").val();
+    // alert(addId);
+    document.getElementById('light').style.display='block';
+    document.getElementById('fade').style.display='block';
+
+    $.ajax({
+     url:"/updateAddress",
+     type:"POST",
+     data:{addId:addId},
+     success:function (data) {
+      $("#provinceName").text(data.province);
+      $("#cityName").text(data.city);
+      $("#areaName").text(data.area);
+      $("#detailAddress").text(data.detailAddress);
+      // alert(data.addId1);
+      $("#name").val(data.name);
+      $("#tel").val(data.tel);
+      $("#addId1").val(data.addId1);
+      province();
+     }
+    })
+   })
+
   }
  </script>
 <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
@@ -120,7 +157,7 @@
   <!--user Address-->
   <section class="Myaddress Overflow">
    <span class="MDtitle Font14 FontW Block Lineheight35">收货人信息</span>
-    <a href="javascript:void(0)" onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"><img src="images\newaddress.png"></a>
+    <a href="javascript:void(0)" onclick="province()"><img src="images\newaddress.png"></a>
     <form method="post" action="">
      <table class="table table-hover" border="1px" >
       <thead>
@@ -136,36 +173,39 @@
        <td th:text="${userAddress.getAddress()}" align="center"></td>
        <td th:text="${userAddress.getName()}" align="center"></td>
        <td th:text="${userAddress.getTel()}" align="center"></td>
-       <td align="center"><a href="" >修改</a></td>
-       <td align="center"><a href="/" >删除</a></td>
+       <td th:text="${userAddress.getAddId()}" hidden name="addId" id="addId"></td>
+       <td align="center"><a href="javascript:;" th:onclick="'javascript:updateAddress(\''+${userAddress.getAddId()}+'\')'">修改</a></td>
+       <td align="center"><a th:href="@{'/deleteAddress?addId='+${userAddress.getAddId()}}">删除</a></td>
       </tr>
       </tbody>
      </table>
     </form>
    <div class="confirm_addr_f">
     <!--add new address-->
-    <form action="#">
+    <form action="/addAddress">
      <div id="light" class="O-L-content">
       <ul>
        <li><span><label for="">选择所在地：</label></span><p><em>*</em>
         <select id="province" name="province" onchange="selectCity()" class="selectpicker" style="width:150px ;height:32px ;margin-left: 16px" >
-         <option>--请选择省--</option>
+         <option id="provinceName">--请选择省--</option>
         </select>
         <select id="city" name="city" onchange="selectArea()" class="selectpicker" style="width:150px ;height:32px ">
-         <option>--请选择市--</option>
+         <option id="cityName">--请选择市--</option>
         </select>
         <select id="area" name="area" class="selectpicker" style="width:150px ;height:32px ">
-         <option>--请选择区--</option>
+         <option id="areaName">--请选择区--</option>
         </select></p></li>
        <li><span><label for="">街道地址：</label></span><p><em>*</em>
-        <textarea name="" cols="80" rows="5"></textarea></p></li>
+        <textarea name="detailAddress" cols="80" rows="5" id="detailAddress"></textarea></p></li>
        <li><span><label for="">收件人姓名：</label></span><p><em>*</em>
-        <input name="" type="text"></p></li>
+        <input name="name" id="name"></p></li>
        <li><span><label for="">手机号码：</label></span><p><em>*</em>
-        <input name="" type="text" pattern="[0-9]{11}" required=""></p></li>
+        <input name="tel" pattern="[0-9]{11}" required="" id="tel"></p></li>
        <div class="button-a">
-        <input type="button" value="确 定" class="C-button">
-        <a href="javascript:void(0)" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"><span><input name="" type="button" value="取 消" class="Cancel-b"></span></a></div>
+        <input id="addId1" name="addId1" hidden="hidden">
+        <input type="submit" value="确 定" class="C-button">
+        <a href="javascript:void(0)" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"><span>
+         <input name="" type="button" value="取 消" class="Cancel-b"></span></a></div>
        <div class="close-botton">
         <a href="javascript:void(0)" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"></a></div>
       </ul></div>

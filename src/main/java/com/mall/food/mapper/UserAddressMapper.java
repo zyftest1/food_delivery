@@ -20,7 +20,7 @@ public interface UserAddressMapper {
     public void insertUserAddress(UserAddress userAddress);
 
     @Update("update user_address set user_id = #{userId},address = #{address},name = #{name},tel = #{tel} where add_id = #{addId}")
-    public void updateUserAddress(Integer addId);
+    public void updateUserAddress(UserAddress userAddress);
 
     @Delete("delete from user_address where add_id = #{addId}")
     public void deleteUserAddressByAddId(Integer addId);
