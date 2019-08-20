@@ -10,10 +10,23 @@
 <script type="text/javascript" src="js\public.js"></script>
 <script type="text/javascript" src="js\jquery.js"></script>
 <script type="text/javascript" src="js\jqpublic.js"></script>
-<!--
-Author: DeathGhost
-Author URI: http://www.deathghost.cn
--->
+<script type="text/javascript">
+    function confirmMember() {
+        if(confirm('注册会员需要188元，确实要成为会员吗？')) {
+            $.ajax({
+                url:"/updateMember",
+                success:function(data) {
+                    if (data.msg == "余额不足，请充值") {
+                        alert(data.msg);
+                    }else if (data.msg == "注册成功") {
+                        alert(data.msg);
+                    }
+                }
+            })
+        }
+    }
+</script>
+
 </head>
 <body>
 <header>
@@ -80,8 +93,31 @@ Author URI: http://www.deathghost.cn
    <div class="U-header MT20 Overflow">
     <img src="upload\testuser.jpg">
     <p class="Font14 FontW"> <span th:text="${session.userCustomer.userName}"></span>欢迎您回到 用户中心！</p>
-    <p class="Font12">您的上一次登录时间:<time> 2016-05-18 14:20:04</time></p>
-    <p class="Font12 CorRed FontW">我的优惠券( 0 ) | 我的积分( 0 )</p>
+<!--    <p class="Font12">您的上一次登录时间:<time> 2016-05-18 14:20:04</time></p>-->
+    <p style="font-size: 16px">
+        <a href="javascript:void(0)" onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">注册会员</a>
+        <span>|</span><a href="#">余 额:<span th:text="${session.userCustomer.balance}"></span><span>元</span></a>
+        <a href="javascript:void(0)" onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">充值入口</a></p>
+       <div class="confirm_addr_f">
+       <form action="">
+           <div id="light" class="O-L-content">
+               <div >
+                   <span>用户名：</span><span th:text="${session.userCustomer.userName}"></span>
+                   <span>余 额：</span><span th:text="${session.userCustomer.balance}"></span>
+                   <div th:if="${session.userCustomer.member==0}">
+                       <button href="" onclick="confirmMember()">注册会员：</button>
+                   </div>
+                   <div th:if="${session.userCustomer.member==1}">
+                       <span>会员</span>
+                   </div>
+               </div>
+               <div class="button-a"><input type="button" value="确 定" class="C-button"><a href="javascript:void(0)" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"><span><input name="" type="button" value="取 消" class="Cancel-b"></span></a></div>
+               <div class="close-botton"><a href="javascript:void(0)" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"></a></div>
+            </div>
+           <div id="fade" class="overlay"></div>
+           <!--End add new address-->
+       </form>
+       </div>
    </div>
     <ul class="s-States Overflow FontW" id="Lbn">
      <li class="Font14 FontW">幸福业务在线提醒：</li>

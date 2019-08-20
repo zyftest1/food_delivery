@@ -164,6 +164,26 @@ public class UserController {
         return "/account";
     }
 
+    @RequestMapping(value = "/updateMember")
+    @ResponseBody
+    public Object updateBalance(HttpSession session){
+        UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
+        session.setAttribute("userCustomer",userCustomer);
+        Map<String, String> map = new HashMap<>();
+        BigDecimal balances = userCustomer.getBalance();
+        BigDecimal i = new BigDecimal(188.00);
+        if (balances.compareTo(i) == -1){
+           map.put("msg","余额不足，请充值!");
+           return map;
+        }else {
+            userCustomer.setBalance(balances.subtract(i));
+            userCustomer.setMember(1);
+            userCustomerService.update(userCustomer);
+            map.put("msg","注册成功");
+            return map;
+        }
+    }
+
     @RequestMapping("/address")
     public String address(Model model,HttpSession session){
         UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
@@ -176,6 +196,7 @@ public class UserController {
         model.addAttribute("userAddressList",userAddressList);
         return "user_address";
     }
+
     @RequestMapping(value = "/pro",method = RequestMethod.POST)
     @ResponseBody
     public Object province(){
@@ -183,6 +204,7 @@ public class UserController {
         String pListJson = JSON.toJSONString(provinces);
         return pListJson;
     }
+
     @RequestMapping(value = "/city",method = RequestMethod.POST)
     @ResponseBody
     public String city(String provinceId){
@@ -190,6 +212,7 @@ public class UserController {
         String pListJson = JSON.toJSONString(cities);
         return pListJson;
     }
+
     @RequestMapping(value = "/area",method = RequestMethod.POST)
     @ResponseBody
     public String area(String cityId){
@@ -197,6 +220,12 @@ public class UserController {
         String pListJson = JSON.toJSONString(areas);
         return pListJson;
     }
+
+    /**
+     * 判断字符串是否为整数
+     * @param str
+     * @return
+     */
     public static boolean isInteger(String str) {
         Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");
         return pattern.matcher(str).matches();
@@ -270,6 +299,7 @@ public class UserController {
         System.out.println(userAddress.getName()+"--"+userAddress.getTel());
         return map;
     }
+
     @RequestMapping("/deleteAddress")
     public String deleteAddress(Model model,HttpSession session,String addId){
         UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
@@ -294,12 +324,14 @@ public class UserController {
         }
         return "user_center";
     }
+
     @RequestMapping("/coupon")
     public String coupon(Model model,HttpSession session){
         UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
         session.setAttribute("userCustomer",userCustomer);
         return "user_coupon";
     }
+
     @RequestMapping("/favorites")
     public String favorites(Model model,HttpSession session){
         UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");

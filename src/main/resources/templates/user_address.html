@@ -68,7 +68,7 @@
  <script type="text/javascript">
   function updateAddress(addId) {
    $(function () {
-    // var addId = $("#addId").val();
+    var addId = $("#addId").val();
     // alert(addId);
     document.getElementById('light').style.display='block';
     document.getElementById('fade').style.display='block';
@@ -185,7 +185,7 @@
     <form action="/addAddress">
      <div id="light" class="O-L-content">
       <ul>
-       <li><span><label for="">选择所在地：</label></span><p><em>*</em>
+       <li><span><label for="">选择所在地：</label></span><p>
         <select id="province" name="province" onchange="selectCity()" class="selectpicker" style="width:150px ;height:32px ;margin-left: 16px" >
          <option id="provinceName">--请选择省--</option>
         </select>
@@ -195,11 +195,11 @@
         <select id="area" name="area" class="selectpicker" style="width:150px ;height:32px ">
          <option id="areaName">--请选择区--</option>
         </select></p></li>
-       <li><span><label for="">街道地址：</label></span><p><em>*</em>
+       <li><span><label for="">街道地址：</label></span><p>
         <textarea name="detailAddress" cols="80" rows="5" id="detailAddress"></textarea></p></li>
-       <li><span><label for="">收件人姓名：</label></span><p><em>*</em>
+       <li><span><label for="">收件人姓名：</label></span><p>
         <input name="name" id="name"></p></li>
-       <li><span><label for="">手机号码：</label></span><p><em>*</em>
+       <li><span><label for="">手机号码：</label></span><p>
         <input name="tel" pattern="[0-9]{11}" required="" id="tel"></p></li>
        <div class="button-a">
         <input id="addId1" name="addId1" hidden="hidden">
