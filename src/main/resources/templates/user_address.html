@@ -162,20 +162,23 @@
      <table class="table table-hover" border="1px" >
       <thead>
       <tr>
-       <th><p align="center">地址</p></th>
-       <th><p align="center">姓名</p></th>
-       <th><p align="center">电话</p></th>
-       <th colspan="2"><p align="center">操作</p></th>
+       <th height="30px"><p align="center"><font size="4px"><b>地址</b></font></p></th>
+       <th height="30px"><p align="center"><font size="4px"><b>姓名</b></font></p></th>
+       <th height="30px"><p align="center"><font size="4px"><b>电话</b></font></p></th>
+       <th  height="30px" colspan="2"><p align="center"><font size="4px"><b>操作</b></font></p></th>
       </tr>
       </thead>
       <tbody>
       <tr th:each="userAddress:${userAddressList}">
-       <td th:text="${userAddress.getAddress()}" align="center"></td>
-       <td th:text="${userAddress.getName()}" align="center"></td>
-       <td th:text="${userAddress.getTel()}" align="center"></td>
-       <td th:text="${userAddress.getAddId()}" hidden name="addId" id="addId"></td>
-       <td align="center"><a href="javascript:;" th:onclick="'javascript:updateAddress(\''+${userAddress.getAddId()}+'\')'">修改</a></td>
-       <td align="center"><a th:href="@{'/deleteAddress?addId='+${userAddress.getAddId()}}">删除</a></td>
+       <td height="30px" th:size="6px" align="center"><font size="3px" th:text="${userAddress.getAddress()}"></font></td>
+
+
+<!--       <td height="30px" th:text="${userAddress.getAddress()}" align="center"></td>-->
+       <td height="30px" align="center"><font size="3px" th:text="${userAddress.getName()}"></font></td>
+       <td height="30px" align="center"><font size="3px" th:text="${userAddress.getTel()}"></font></td>
+       <td height="30px" hidden name="addId" id="addId"><font size="3px" th:text="${userAddress.getAddId()}"></font></td>
+       <td align="center"><a href="javascript:;" th:onclick="'javascript:updateAddress(\''+${userAddress.getAddId()}+'\')'"><font size="3px">修改</font></a></td>
+       <td align="center"><a th:href="@{'/deleteAddress?addId='+${userAddress.getAddId()}}"><font size="3px">删除</font></a></td>
       </tr>
       </tbody>
      </table>
