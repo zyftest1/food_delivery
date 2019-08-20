@@ -12,9 +12,9 @@ import java.util.List;
 public interface CommodityMapper {
     @Select("select * from commodity")
     public List<Commodity> selectAll();
-    @Select("select * from commodity where type = #{commodityType}")
+    @Select("select * from commodity where type = #{commodityType} limit 6")
     public List<Commodity> selectByType(String commodityType);
-    @Select("select * from commodity where comId = #{commodityId}")
+    @Select("select * from commodity where com_id = #{commodityId}")
     public Commodity selectById(Integer commodityId);
     @Select("select * from commodity limit #{number}")
     public List<Commodity> selectByLimit(Integer number);
