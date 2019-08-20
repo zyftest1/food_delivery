@@ -11,6 +11,6 @@ public class Commodity {
     private String bId;
     private String size;
     private BigDecimal price;
-    private String describe;
+    private String describes;
     private String picture;
 }

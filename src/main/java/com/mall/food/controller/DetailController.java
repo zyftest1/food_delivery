@@ -8,12 +8,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class detailspController {
+public class DetailController {
+
     @Autowired
     CommodityMapper commodityMapper;
-    @RequestMapping("/detailsp")
-    public String selectByIdCommodity(Integer id, Model model){
-        Commodity commodity = commodityMapper.selectById(id);
+    @RequestMapping("/detail")
+    public String selectByIdCommodity(Integer comId, Model model){
+        Commodity commodity = commodityMapper.selectById(comId);
         System.out.println(commodity);
         model.addAttribute("commodityDetail",commodity);
         return "detailsp";

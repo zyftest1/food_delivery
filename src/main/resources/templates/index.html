@@ -67,7 +67,7 @@
     <div class="F-middle">
         <ul class="rslides f426x240">
             <li th:each="advertisement : ${advertisements}">
-                <a href="javascript:">
+                <a th:href="@{'/detail?comId='+${advertisement.comId}}">
                     <img th:src="${advertisement.picture}" style="height:403px;width:600px">
                 </a>
             </li>
@@ -101,7 +101,7 @@
                 <ul style="display:block;">
                     <li>
                         <div class="SCcontent">
-                            <a href="/detailsp?id="+${commodity.comId} target="_blank" title="菜品名称" th:each="commodity : ${commoditys}">
+                            <a target="_blank" title="菜品名称" th:each="commodity : ${commoditys}" th:href="@{'/detail?comId='+${commodity.comId}}">
                                 <figure>
                                     <img th:src="${commodity.picture}">
                                     <figcaption>

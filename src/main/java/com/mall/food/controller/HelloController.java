@@ -30,6 +30,19 @@ import java.util.List;
 //    }
 //
 //}
+//@Controller
+//public class detailspController {
+//    @Autowired
+//    CommodityMapper commodityMapper;
+//    @RequestMapping("/detailsp")
+//    public String selectByIdCommodity(Integer id, Model model){
+//        Commodity commodity = commodityMapper.selectById(id);
+//        System.out.println(commodity);
+//        model.addAttribute("commodityDetail",commodity);
+//        return "detailsp";
+//    }
+//        }
+
 @Controller
 public class HelloController {
 
