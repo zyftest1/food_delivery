@@ -102,12 +102,14 @@
        <form action="">
            <div id="light" class="O-L-content">
                <div >
-                   <span>用户名：</span><span th:text="${session.userCustomer.userName}"></span>
-                   <span>余 额：</span><span th:text="${session.userCustomer.balance}"></span>
                    <div th:if="${session.userCustomer.member==0}">
+                    <span>用户名：</span><span th:text="${session.userCustomer.userName}"></span>
+                    <span>余 额：</span><span th:text="${session.userCustomer.balance}"></span>
                        <button href="" onclick="confirmMember()">注册会员：</button>
                    </div>
                    <div th:if="${session.userCustomer.member==1}">
+                    <span>用户名：</span><span th:text="${session.userCustomer.userName}"></span>
+                    <span>余 额：</span><span th:text="${session.userCustomer.balance}"></span>
                        <span>会员</span>
                    </div>
                </div>

@@ -31,8 +31,6 @@ public class IndexController {
         model.addAttribute("commoditys",commodityList);
         List<Business> businessList = businessService.selectForIndexBusiness(3);
         model.addAttribute("businesss",businessList);
-//        UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
-//        System.out.println(userCustomer);
         if (session.getAttribute("userCustomer") != null){
             UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
             session.setAttribute("userCustomer",userCustomer);
