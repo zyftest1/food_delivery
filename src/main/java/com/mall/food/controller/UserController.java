@@ -161,7 +161,7 @@ public class UserController {
     public String coupon(Model model,HttpSession session){
         UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
         session.setAttribute("userCustomer",userCustomer);
-        return "user_coupon";
+        return "redirect:/coupon/selectByUserId";
     }
 //我的收藏
     @RequestMapping("/favorites")

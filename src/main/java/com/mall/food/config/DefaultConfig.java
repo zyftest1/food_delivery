@@ -23,6 +23,7 @@ public class DefaultConfig implements WebMvcConfigurer {
 //        registry.addViewController("/index").setViewName("/initIndex");
 //        registry.addViewController("/index.html").setViewName("/initIndex");
 //        registry.addViewController("/main.html").setViewName("dashboard");
+        registry.addViewController("/login.html").setViewName("login");
     }
 }
 //    //日期格式化有错

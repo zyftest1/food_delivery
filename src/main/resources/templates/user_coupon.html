@@ -65,6 +65,7 @@ Author URI: http://www.deathghost.cn
    <li><i></i><a href="/logout">安全退出</a></li>
   </ul>
  </nav>
+ <div><ul><li style="float: left;display: inline"  th:each="c:${list}"><img style="margin-right: 3px" th:src="${c.icon}" height="80"/></li> </ul></div>
  <article class="U-article Overflow">
   <!--user Coupon-->
   <section class="M-coupon Overflow">
@@ -80,6 +81,7 @@ Author URI: http://www.deathghost.cn
     </a>
    </ul>
   </section>
+
  </article>
 </section>
 <footer>
