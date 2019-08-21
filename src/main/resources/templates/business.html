@@ -43,19 +43,27 @@
             <span>西安市 [ <a href="#">莲湖区</a> ]</span>
         </div>
         <div class="Search">
-            <form method="get" id="main_a_serach" onsubmit="return check_search(this)">
+            <form method="get" id="main_a_serach" action="/like">
                 <div class="Search_nav" id="selectsearch">
                     <a href="javascript:;" onclick="selectsearch(this,'restaurant_name')" class="choose">餐厅</a>
                     <a href="javascript:;" onclick="selectsearch(this,'food_name')">食物名</a>
                 </div>
                 <div class="Search_area">
-                    <input type="search" id="fkeyword" name="keyword" placeholder="请输入您所需查找的餐厅名称或食物名称..."
-                           class="searchbox">
+                    <input type="search" id="fkeyword" name="com_name" placeholder="请输入您所需查找的餐厅名称或食物名称..." class="searchbox">
                     <input type="submit" class="searchbutton" value="搜 索">
                 </div>
             </form>
+            <p class="hotkeywords"><a href="#" title="酸辣土豆丝">酸辣土豆丝</a><a href="#" title="这里是产品名称">螃蟹炒年糕</a><a href="#" title="这里是产品名称">牛奶炖蛋</a><a href="#" title="这里是产品名称">芝麻酱凉面</a><a href="#" title="这里是产品名称">滑蛋虾仁</a><a href="#" title="这里是产品名称">蒜汁茄子</a></p>
         </div>
     </div>
+    <nav class="menu_bg">
+        <ul class="menu">
+            <li><a href="/index">首页</a></li>
+            <li><a href="/list">订餐</a></li>
+            <li><a href="/category">积分商城</a></li>
+            <li><a href="/read">关于我们</a></li>
+        </ul>
+    </nav>
 </header>
 <!--Start content-->
 <section class="Sfainfor">
@@ -166,8 +174,8 @@
             </div>
         </section>
     </section>
-    <div class="copyright">© 版权所有 2016 DeathGhost 技术支持：<a href="http://www.deathghost.cn"
-                                                          title="DeathGhost">DeathGhost</a></div>
+    <div class="copyright">© 版权所有 2016 DeathGhost 技术支持：
+        <a href="http://www.deathghost.cn" title="DeathGhost">DeathGhost</a></div>
 </footer>
 </body>
 </html>
