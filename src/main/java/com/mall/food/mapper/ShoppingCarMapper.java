@@ -8,8 +8,8 @@ import java.util.List;
 @Mapper
 @Repository
 public interface ShoppingCarMapper {
-    @Select("select* from Shopping_Car")
+    @Select("select * from Shopping_Car")
     public List<ShoppingCarMapper> selAllShoppingCars();
-    @Select("select* from ShoppingCar where car_id = {#CarId}")
+    @Select("select * from ShoppingCar where car_id = {#CarId}")
     public List<ShoppingCarMapper> selShoppingCarById(Integer CarId);
 }
