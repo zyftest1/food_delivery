@@ -31,12 +31,19 @@ public class OrderlistController {
     }
 
     @RequestMapping("/orderlist")
-    public String orderlist(Model model,@RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum){
-        PageHelper.startPage(pageNum,5);
-        List<Order> orders = orderMapper.selAllOrders();
-        PageInfo<Order> page = new PageInfo<>(orders);
-        model.addAttribute("page",page);
-        return "user_orderlist";
+    public String orderlist(Model model,@RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum,HttpSession session){
+        UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
+
+        if (userCustomer == null || "".equals(userCustomer)){
+            return "/login";
+        }
+            String userId = userCustomer.getUserId();
+            PageHelper.startPage(pageNum,5);
+            List<Order> orders = orderMapper.selectAll(userId);
+            System.out.println(orders);
+            PageInfo<Order> page = new PageInfo<>(orders);
+            model.addAttribute("page",page);
+            return "user_orderlist";
     }
 
     @RequestMapping("/orderT")
