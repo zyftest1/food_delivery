@@ -66,9 +66,9 @@ Author URI: http://www.deathghost.cn
       <td class="tb1_td7">操作</td>
     </tr>
   </table>
-  <table cellpadding="0" cellspacing="0" class="gwc_tb2" id="table1">
+  <table cellpadding="0" cellspacing="0" class="gwc_tb2" id="table1" th:each="shoppingCar:${shoppingCarList}">
     <tr>
-     <td colspan="7" class="shopname Font14 FontW">店铺：好味来快餐店</td>
+     <td colspan="7" class="shopname Font14 FontW" th:text="${shoppingCar.comName}">店铺：好味来快餐店</td>
     </tr>
     <tr>
       <td class="tb2_td1"><input type="checkbox" value="1" name="newslist" id="newslist-1"></td>

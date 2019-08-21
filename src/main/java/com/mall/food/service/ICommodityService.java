@@ -10,4 +10,6 @@ public interface ICommodityService {
      List<Commodity> selectAllCommodity();
      List<Commodity> selectByTypeCommodity(String commodityType);
      List<Commodity> selectForIndexCommodity(Integer number);
+
+     Commodity selectById(Integer comId);
 }

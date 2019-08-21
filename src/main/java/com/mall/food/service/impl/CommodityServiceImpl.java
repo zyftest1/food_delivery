@@ -39,4 +39,12 @@ public class CommodityServiceImpl implements ICommodityService {
         List<Commodity> commodityList = commodityMapper.selectByLimit(number);
         return commodityList;
     }
+
+    @Override
+    public Commodity selectById(Integer comId) {
+        Commodity commodity = commodityMapper.selectById(comId);
+        return commodity;
+    }
+
+
 }
