@@ -82,8 +82,8 @@
         <div class="C-time">
             <img src="upload\dc.jpg">
         </div>
-        <a href="list.html" target="_self"><img src="images\by_button.png" ></a>
-        <a href="list.html" target="_self"><img src="images\dc_button2.png"></a>
+        <a href="list.html" target="_self"><img src="images\by_button.png"></a>
+        <a href="list.html" target="_self"><img src="images\dc_button.png"></a>
     </aside>
 </section>
 <section class="Sfainfor">
@@ -101,7 +101,7 @@
                 <ul style="display:block;">
                     <li>
                         <div class="SCcontent">
-                            <a target="_blank" title="菜品名称" th:each="commodity : ${commoditys}" th:href="@{'/detail?comId='+${commodity.comId}}">
+                            <a target="_blank" title="菜品名称" th:each="commodity : ${commodityLike}" th:href="@{'/detail?comId='+${commodity.comId}}">
                                 <figure>
                                     <img th:src="${commodity.picture}">
                                     <figcaption>

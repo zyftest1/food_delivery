@@ -19,4 +19,7 @@ public interface CommodityMapper {
     @Select("select * from commodity limit #{number}")
     public List<Commodity> selectByLimit(Integer number);
 
+    @Select("select * from commodity where com_name like concat('%',#{com_name},'%') limit 6")
+    public List<Commodity> selectByLike(String com_name);
+
 }
