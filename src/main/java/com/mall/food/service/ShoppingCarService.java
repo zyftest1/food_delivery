@@ -13,6 +13,10 @@ public class ShoppingCarService {
     @Autowired
     private ShoppingCarMapper shoppingCarMapper;
 
+    public ShoppingCar selectById(Integer carId){
+        ShoppingCar shoppingCar = shoppingCarMapper.selShoppingCarById(carId);
+        return shoppingCar;
+    }
 
     public List<ShoppingCar> getAll(){
         List<ShoppingCar> shoppingCarList = shoppingCarMapper.selAllShoppingCars();
@@ -21,6 +25,10 @@ public class ShoppingCarService {
 
     public void insert(ShoppingCar shoppingCar){
         shoppingCarMapper.insert(shoppingCar);
+    }
+
+    public void update(ShoppingCar shoppingCar){
+        shoppingCarMapper.updateShoppingCar(shoppingCar);
     }
 
 //    public void update(UserCustomer userCustomer){

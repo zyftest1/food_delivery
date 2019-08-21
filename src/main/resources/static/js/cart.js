@@ -70,9 +70,11 @@ function GetCount() {
 			$("#table2").remove();
 			});
 		});
-<!---商品加减算总数---->
+
+// <!---商品加减算总数---->
 	$(function () {
 		var t = $("#text_box2");
+		var price = $("#price").val();
 		$("#add2").click(function () {
 			t.val(parseInt(t.val()) + 1)
 			setTotal(); GetCount();
@@ -83,13 +85,14 @@ function GetCount() {
 			setTotal(); GetCount();
 		})
 		function setTotal() {
-			$("#total2").html((parseInt(t.val()) * 59).toFixed(2));
-			$("#newslist-2").val(parseInt(t.val()) * 59);
+			$("#total2").html((parseInt(t.val()) * price).toFixed(2));
+			$("#newslist-2").val(parseInt(t.val()) * price);
 		}
 		setTotal();
 	})
 	$(function () {
 		var t = $("#text_box1");
+		var price = $("#price").val();
 		$("#add1").click(function () {
 			t.val(parseInt(t.val()) + 1)
 			setTotal(); GetCount();
@@ -100,13 +103,12 @@ function GetCount() {
 			setTotal(); GetCount();
 		})
 		function setTotal() {
-
-			$("#total1").html((parseInt(t.val()) * 59).toFixed(2));
-			$("#newslist-1").val(parseInt(t.val()) * 59);
+			$("#total1").html((parseInt(t.val()) * price).toFixed(2));
+			$("#newslist-1").val(parseInt(t.val()) * price);
 		}
 		setTotal();
 	})
-<!---总数---->
+// <!---总数---->
 	$(function () {
 		$(".quanxun").click(function () {
 			setTotal();

@@ -2,9 +2,7 @@ package com.mall.food.mapper;
 
 import com.mall.food.pojo.ShoppingCar;
 import com.mall.food.pojo.UserCoupon;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
@@ -21,7 +19,12 @@ public interface ShoppingCarMapper {
             " values(#{userId},#{bId},#{userName},#{comId},#{comName},#{price},#{quantity},#{size},#{describes},#{picture},#{addId},#{address})")
     public void insert(ShoppingCar shoppingCar);
 
-    @Select("select * from shopping_car where user_id = #{userId}")
-    public List<ShoppingCar> selByUserId(String uId);
+    @Update("update shopping_car set user_id = #{userId},b_id = #{bId},user_name = #{userName},com_name = #{comName}," +
+            "price = #{price},quantity = #{quantity},size=#{size},describes =#{describes},picture=#{picture},add_id=#{addId},address=#{address}" +
+            "where com_id = #{comId}")
+    public void  updateShoppingCar(ShoppingCar shoppingCar);
+
+    @Delete("delete from shopping_car where car_id = #{carId}")
+    public void deleteById(Integer carId);
 
 }
