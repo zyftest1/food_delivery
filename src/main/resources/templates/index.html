@@ -68,8 +68,8 @@
         <div class="C-time">
             <img src="upload\dc.jpg">
         </div>
-        <a href="business.html" target="_self"><img src="images\by_button.png"></a>
-        <a href="business.html" target="_self"><img src="images\dc_button.png"></a>
+        <a href="/toShopList" target="_self"><img src="images\by_button.png"></a>
+        <a href="/toShopList" target="_self"><img src="images\dc_button.png"></a>
     </aside>
 </section>
 <section class="Sfainfor">
@@ -99,7 +99,7 @@
                 <ul>    `
                     <li>
                         <div class="DCcontent">
-                            <a href="shop.html" target="_blank" title="TITLE:店名" th:each="store : ${businesss}">
+                            <a href="shop.html" target="_blank" title="TITLE:店名" th:each="store : ${businesss}" th:href="@{'/toShop?bId='+${business.bId}}">
                                 <figure>
                                     <img th:src="${store.bPicture}">
                                     <span class="title" th:text="${store.bName}">店名</span>

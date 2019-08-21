@@ -16,4 +16,17 @@ public class BusinessServiceImpl implements IbusinessService {
         List<Business> businessList = businessMapper.selectByLimit(number);
         return businessList;
     }
+
+    @Override
+    public List<Business> selectAllBusiness() {
+        List<Business> businessList = businessMapper.selectAll();
+        return businessList;
+    }
+
+    @Override
+    public Business selectById(String id) {
+        Business business = businessMapper.selectBusinessById(id);
+        return business;
+    }
+
 }

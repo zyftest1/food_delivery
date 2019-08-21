@@ -29,6 +29,9 @@ public class ListController {
     }
     @RequestMapping("/toShopList")
     public String initShopList(Model model){
-        return "";
+        List<Business> businessList = businessService.selectAllBusiness();
+        model.addAttribute("allBusiness",businessList);
+        System.out.println(businessList);
+        return "business";
     }
 }

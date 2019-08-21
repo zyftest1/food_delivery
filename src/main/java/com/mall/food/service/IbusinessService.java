@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface IbusinessService {
     List<Business> selectForIndexBusiness(Integer number);
+    List<Business> selectAllBusiness();
+    Business selectById(String id);
 }
