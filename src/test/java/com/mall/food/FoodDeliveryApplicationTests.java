@@ -2,6 +2,7 @@ package com.mall.food;
 
 import com.mall.food.mapper.*;
 import com.mall.food.pojo.*;
+import com.mall.food.service.UserAddressService;
 import org.apache.ibatis.annotations.Select;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,13 +38,15 @@ public class FoodDeliveryApplicationTests {
     private OrderMapper orderMapper;
     @Autowired
     private CouponMapper couponMapper;
-
+    @Autowired
+    private ShoppingCarMapper shoppingCarMapper;
+    @Autowired
+    private UserAddressService userAddressService;
 
     @Test
     public void contextLoads() throws SQLException {
-        System.out.println("----"+dataSource.getConnection());
-        Integer count = jdbcTemplate.queryForObject("select count(*) from user_customer",Integer.class);
-        System.out.println(count);
+//        List<ShoppingCar> shoppingCars = shoppingCarMapper.selByUserId("15500004444");
+//        System.out.println(shoppingCars);
     }
 
     @Test

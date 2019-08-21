@@ -21,4 +21,7 @@ public interface ShoppingCarMapper {
             " values(#{userId},#{bId},#{userName},#{comId},#{comName},#{price},#{quantity},#{size},#{describes},#{picture},#{addId},#{address})")
     public void insert(ShoppingCar shoppingCar);
 
+    @Select("select * from shopping_car where user_id = #{userId}")
+    public List<ShoppingCar> selByUserId(String uId);
+
 }

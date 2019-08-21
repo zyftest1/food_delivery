@@ -1,7 +1,11 @@
 package com.mall.food.pojo;
+import lombok.Builder;
 import lombok.Data;
+
+import java.math.BigDecimal;
 import java.util.Date;
 
+@Builder
 @Data
 public class Order {
     private Integer ordId;
@@ -11,8 +15,9 @@ public class Order {
     private String schedule;
     private String userId;
     private String tel;
-    private Integer conId;
-    private Integer price;
+    private Integer comId;
+    private String  comName;
+    private BigDecimal price;
     private Integer quantity;
     private String bID;
     private String bName;

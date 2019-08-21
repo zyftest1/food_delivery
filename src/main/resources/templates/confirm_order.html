@@ -10,10 +10,8 @@
 <script type="text/javascript" src="js\public.js"></script>
 <script type="text/javascript" src="js\jquery.js"></script>
 <script type="text/javascript" src="js\jqpublic.js"></script>
-
  <script type="text/javascript">
   function province(){
-   $(function(){
     document.getElementById('light').style.display='block';
     document.getElementById('fade').style.display='block';
     $.ajax({
@@ -26,7 +24,6 @@
        pSelect.append(" <option value='"+pList[i].provinceId+"'>"+pList[i].province+"</option>")
       }
      }
-    })
    })
   }
   function selectCity() {
@@ -65,6 +62,8 @@
    })
   }
  </script>
+
+
 <!--
 Author: DeathGhost
 Author URI: http://www.deathghost.cn
@@ -134,28 +133,45 @@ Author URI: http://www.deathghost.cn
   <!--已保存的地址列表-->
   <form action="#">
    <ul class="address" th:each="a,iterStat : ${addresses}">
-    <li th:id="'style'+${iterStat.index}"><input type="radio" th:value="a" id="1" th:id="${iterStat.index}" name="rdColor" onclick="changeColor(1)" th:onclick="changeColor(${iterStat.index})"><label for="1" th:for="${iterStat.index}" th:text="a.address"> 浙江省 杭州市 余杭区 航海路1588号（孙先生收）<span class="fontcolor" th:text="a.tel">183092***73</span></label></li>
+    <li th:id="'style'+${iterStat.index}"><input type="radio" th:value="a" id="1" th:id="${iterStat.index}" name="rdColor" onclick="changeColor(1)" th:onclick="changeColor(${iterStat.index})"><label for="1" th:for="${iterStat.index}" th:text="${a.address}"> 浙江省 杭州市 余杭区 航海路1588号（孙先生收）<span class="fontcolor" th:text="${a.tel}">183092***73</span></label></li>
 <!--    <li id="style2"><input type="radio" value="" id="2" name="rdColor" onclick="changeColor(2)"><label for="2" th:text=""> 陕西省 西安市 雁塔区 丈八路22号（孙先生收）<span class="fontcolor">183092***73</span></label></li>-->
-    <li><a href="javascript:void(0)" onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"><img src="images\newaddress.png"></a></li>
+<!--    <li><a href="javascript:void(0)" onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"><img src="images\newaddress.png"></a></li>-->
+   </ul>
+   <ul class="address">
+    <li><a href="javascript:void(0)" ><img src="images\newaddress.png" onclick="province()"></a></li>
    </ul>
    </form>
    <!--add new address-->
-   <form action="#">
+  <form action="/addAddress" >
    <div id="light" class="O-L-content">
     <ul>
-     <li><span><label for="">选择所在地：</label></span><p><em>*</em><select name=""><option>陕西省</option></select> <select name=""><option>西安市</option></select> <select name=""><option>雁塔区</option></select></p></li>
-     <li><span><label for="">邮政编码：</label></span><p><em>*</em><input name="" type="text" class="Y_N" pattern="[0-9]{6}" required=""></p></li>
-     <li><span><label for="">街道地址：</label></span><p><em>*</em><textarea name="" cols="80" rows="5"></textarea></p></li>
-     <li><span><label for="">收件人姓名：</label></span><p><em>*</em><input name="" type="text"></p></li>
-     <li><span><label for="">手机号码：</label></span><p><em>*</em><input name="" type="text" pattern="[0-9]{11}" required=""></p></li>
-     <div class="button-a"><input type="button" value="确 定" class="C-button"><a href="javascript:void(0)" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"><span><input name="" type="button" value="取 消" class="Cancel-b"></span></a></div>
-    <div class="close-botton"><a href="javascript:void(0)" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"></a></div>
-   </ul></div> 
+     <li><span><label for="">选择所在地：</label></span><p>
+      <select id="province" name="province" onchange="selectCity()" class="selectpicker" style="width:150px ;height:32px ;margin-left: 16px" >
+       <option id="provinceName">--请选择省--</option>
+      </select>
+      <select id="city" name="city" onchange="selectArea()" class="selectpicker" style="width:150px ;height:32px ">
+       <option id="cityName">--请选择市--</option>
+      </select>
+      <select id="area" name="area" class="selectpicker" style="width:150px ;height:32px ">
+       <option id="areaName">--请选择区--</option>
+      </select></p></li>
+     <li><span><label for="">街道地址：</label></span><p>
+      <textarea name="detailAddress" cols="80" rows="5" id="detailAddress"></textarea></p></li>
+     <li><span><label for="">收件人姓名：</label></span><p>
+      <input name="name" id="name"></p></li>
+     <li><span><label for="">手机号码：</label></span><p>
+      <input name="tel" pattern="[0-9]{11}" required="" id="tel"></p></li>
+     <div class="button-a">
+      <input id="addId1" name="addId1" hidden="hidden">
+      <input type="submit" value="确 定" class="C-button">
+      <a href="javascript:void(0)" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"><span>
+         <input name="" type="button" value="取 消" class="Cancel-b"></span></a></div>
+     <div class="close-botton">
+      <a href="javascript:void(0)" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"></a></div>
+    </ul></div>
    <div id="fade" class="overlay"></div>
-    
-    
    <!--End add new address-->
-   </form>
+  </form>
  </div>
 <!--配送方式及支付，则显示如下-->
 <!--check order or add other information-->
@@ -178,7 +194,7 @@ Author URI: http://www.deathghost.cn
     </ul>
    </form>
   </div>
-  <form action="#">
+  <form action="/confirm2.do/" id="confirm">
   <div class="inforlist">
    <span class="flow_title">商品清单</span>
    <table>
@@ -186,11 +202,11 @@ Author URI: http://www.deathghost.cn
     <th>数量</th>
     <th>价格</th>
     <th>小计</th>
-    <tr th:each="c:${session.userCustomer}">
-     <td th:text="${c.comName}">酸辣土豆丝</td>
-     <td th:text="${c.quantity}">2</td>
-     <td th:text="'￥'+${c.price}">￥59</td>
-     <td th:text="${c.price*c.quantity}">￥118</td>
+    <tr th:each="s:${shoppingCars}">
+     <td th:text="${s.comName}">酸辣土豆丝</td>
+     <td th:text="${s.quantity}">2</td>
+     <td th:text="'￥'+${s.price}">￥59</td>
+     <td th:text="${s.price*s.quantity}">￥118</td>
     </tr>
 <!--    <tr>-->
 <!--     <td>鱼香肉丝</td>-->
@@ -208,8 +224,8 @@ Author URI: http://www.deathghost.cn
      </p>
     </div>
     <div class="Sum_infor">
-    <p class="p1">配送费用：￥0.00+商品费用：￥177.00-优惠券：￥10.00</p>
-    <p class="p2">合计：<span>￥167.00</span></p>
+    <p class="p1" th:text="'商品费用：￥'+${total}+'-'+'优惠券：￥10.00'"></p>
+    <p class="p2">合计：<span th:text="'￥'+${total}" ></span></p>
     <input type="submit" value="提交订单" class="p3button">
     </div>
    </div>
@@ -229,8 +245,8 @@ $(document).ready(function(){
 <section class="Psection MT20 Textcenter" style="display:none;" id="Aflow">
   <!-- 订单提交成功后则显示如下 -->
   <p class="Font14 Lineheight35 FontW">恭喜你！订单提交成功！</p>
-  <p class="Font14 Lineheight35 FontW">您的订单编号为：<span class="CorRed">201409205134</span></p>
-  <p class="Font14 Lineheight35 FontW">共计金额：<span class="CorRed">￥359</span></p>
+  <p class="Font14 Lineheight35 FontW">您的订单编号为：<span class="CorRed" th:text="${date}">201909205134</span></p>
+  <p class="Font14 Lineheight35 FontW">共计金额：<span class="CorRed" th:text="'￥'+${total}">359</span></p>
   <p><button type="button" class="Lineheight35"><a href="#" target="_blank">支付宝立即支付</a></button><button type="button" class="Lineheight35"><a href="user_center.html">进入用户中心</a></button></p>
 </section>
 <footer>
@@ -243,7 +259,7 @@ $(document).ready(function(){
    </div>
    <div class="tips">
     <p>客服热线</p>
-    <p><i>1830927**73</i></p>
+    <p><i>18309271273</i></p>
     <p>配送时间</p>
     <p><time>09：00</time>~<time>22:00</time></p>
     <p>网站公告</p>
@@ -282,4 +298,5 @@ $(document).ready(function(){
  <div class="copyright">© 版权所有 2016 DeathGhost 技术支持：<a href="http://www.deathghost.cn" title="DeathGhost">DeathGhost</a></div>
 </footer>
 </body>
+
 </html>
