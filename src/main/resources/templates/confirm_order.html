@@ -10,6 +10,61 @@
 <script type="text/javascript" src="js\public.js"></script>
 <script type="text/javascript" src="js\jquery.js"></script>
 <script type="text/javascript" src="js\jqpublic.js"></script>
+
+ <script type="text/javascript">
+  function province(){
+   $(function(){
+    document.getElementById('light').style.display='block';
+    document.getElementById('fade').style.display='block';
+    $.ajax({
+     url:"/pro",
+     type:"POST",
+     success:function (data) {
+      var pList =  JSON.parse(data);
+      var pSelect = $("#province");
+      for(var i = 0 ; i < pList.length;i++){
+       pSelect.append(" <option value='"+pList[i].provinceId+"'>"+pList[i].province+"</option>")
+      }
+     }
+    })
+   })
+  }
+  function selectCity() {
+   var provinceId = $("#province").val();
+   // alert(provinceId)
+   $.ajax({
+    url:"/city",
+    type:"POST",
+    data:{provinceId:provinceId},
+    success:function (data) {
+     var cList =  JSON.parse(data);
+     var cSelect = $("#city");
+     cSelect.empty();
+     for(var i = 0 ; i < cList.length;i++){
+      cSelect.append(" <option value='"+cList[i].cityId+"'>"+cList[i].city+"</option>")
+     }
+    }
+   })
+  }
+
+  function selectArea() {
+   var cityId = $("#city").val();
+   // alert(cityId);
+   $.ajax({
+    url:"/area",
+    type:"POST",
+    data:{cityId:cityId},
+    success:function (data) {
+     var aList =  JSON.parse(data);
+     var aSelect = $("#area");
+     aSelect.empty();
+     for(var i = 0 ; i < aList.length;i++){
+      aSelect.append(" <option value='"+aList[i].areaId+"'>"+aList[i].area+"</option>")
+     }
+    }
+   })
+  }
+ </script>
 <!--
 Author: DeathGhost
 Author URI: http://www.deathghost.cn
@@ -78,9 +133,9 @@ Author URI: http://www.deathghost.cn
   </form>
   <!--已保存的地址列表-->
   <form action="#">
-   <ul class="address">
-    <li id="style1"><input type="radio" value="" id="1" name="rdColor" onclick="changeColor(1)"><label for="1"> 浙江省 杭州市 余杭区 航海路1588号（孙先生收）<span class="fontcolor">183092***73</span></label></li>
-    <li id="style2"><input type="radio" value="" id="2" name="rdColor" onclick="changeColor(2)"><label for="2"> 陕西省 西安市 雁塔区 丈八路22号（孙先生收）<span class="fontcolor">183092***73</span></label></li>
+   <ul class="address" th:each="a,iterStat : ${addresses}">
+    <li th:id="'style'+${iterStat.index}"><input type="radio" th:value="a" id="1" th:id="${iterStat.index}" name="rdColor" onclick="changeColor(1)" th:onclick="changeColor(${iterStat.index})"><label for="1" th:for="${iterStat.index}" th:text="a.address"> 浙江省 杭州市 余杭区 航海路1588号（孙先生收）<span class="fontcolor" th:text="a.tel">183092***73</span></label></li>
+<!--    <li id="style2"><input type="radio" value="" id="2" name="rdColor" onclick="changeColor(2)"><label for="2" th:text=""> 陕西省 西安市 雁塔区 丈八路22号（孙先生收）<span class="fontcolor">183092***73</span></label></li>-->
     <li><a href="javascript:void(0)" onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"><img src="images\newaddress.png"></a></li>
    </ul>
    </form>
@@ -105,17 +160,17 @@ Author URI: http://www.deathghost.cn
 <!--配送方式及支付，则显示如下-->
 <!--check order or add other information-->
  <div class="pay_delivery">
-  <span class="flow_title">配送方式：</span>
-  <table>
-   <th width="30%">配送方式</th>
-   <th width="30%">运费</th>
-   <th width="40%">说明</th>
-   <tr>
-    <td>送货上门</td>
-    <td>￥0.00</td>
-    <td>配送说明信息...</td>
-   </tr>
-  </table>
+<!--  <span class="flow_title">配送方式：</span>-->
+<!--  <table>-->
+<!--   <th width="30%">配送方式</th>-->
+<!--   <th width="30%">运费</th>-->
+<!--   <th width="40%">说明</th>-->
+<!--   <tr>-->
+<!--    <td>送货上门</td>-->
+<!--    <td>￥0.00</td>-->
+<!--    <td>配送说明信息...</td>-->
+<!--   </tr>-->
+<!--  </table>-->
   <span class="flow_title">在线支付方式：</span>
    <form action="#">
     <ul>
@@ -131,21 +186,21 @@ Author URI: http://www.deathghost.cn
     <th>数量</th>
     <th>价格</th>
     <th>小计</th>
-    <tr>
-     <td>酸辣土豆丝</td>
-     <td>2</td>
-     <td>￥59</td>
-     <td>￥118</td>
+    <tr th:each="c:${session.userCustomer}">
+     <td th:text="${c.comName}">酸辣土豆丝</td>
+     <td th:text="${c.quantity}">2</td>
+     <td th:text="'￥'+${c.price}">￥59</td>
+     <td th:text="${c.price*c.quantity}">￥118</td>
     </tr>
-    <tr>
-     <td>鱼香肉丝</td>
-     <td>1</td>
-     <td>￥59</td>
-     <td>￥59</td>
-    </tr>
+<!--    <tr>-->
+<!--     <td>鱼香肉丝</td>-->
+<!--     <td>1</td>-->
+<!--     <td>￥59</td>-->
+<!--     <td>￥59</td>-->
+<!--    </tr>-->
    </table>
     <div class="Order_M">
-     <p><em>订单附言:</em><input name="" type="text"></p>
+<!--     <p><em>订单附言:</em><input name="" type="text"></p>-->
      <p><em>优惠券:</em>
      <select name="">
       <option>￥10元优惠券</option>
