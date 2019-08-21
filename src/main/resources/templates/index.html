@@ -7,6 +7,40 @@
     <script type="text/javascript" src="js\public.js"></script>
     <script type="text/javascript" src="js\jquery.js"></script>
     <script type="text/javascript" src="js\jqpublic.js"></script>
+    <script type="text/javascript" src="webjars/jquery/3.4.1/jquery.js"></script>
+    <style type="text/css">
+        .mydesign{
+            width:1200px;
+            height:80px;
+            line-height:80px;
+            margin:0 auto;
+            font-size:16px;
+            font-weight:bold;
+        }
+    </style>
+    <script type="text/javascript">
+        function confirmMember(coupon) {
+            // alert(coupon);
+            if(confirm('确定要获取优惠券吗？')) {
+
+                $.ajax({
+                    url:"/coupon/tianjia",
+                    data:{'coupon':coupon},
+                    success:function(data) {
+                        if(data.msg=="请先登录"){
+                            alert(data.msg)
+                            window.location.href="/login";
+                        }
+                        else if(data.msg == "已拥有该优惠券，请使用后再添加!") {
+                            alert(data.msg);
+                        }else if (data.msg == "添加成功") {
+                            alert(data.msg);
+                        }
+                    }
+                })
+            }
+        }
+    </script>
 </head>
 <body>
 <header>
@@ -45,6 +79,13 @@
                 </div>
             </form>
         </div>
+    </div>
+    <div >
+        <nav class="menu_bg">
+            <ul class="mydesign">
+                <li style="float: left;display: inline"  th:each="c:${page.list}"><a th:onclick="'javascript:confirmMember('+${c.coupon}+')'"><img style="margin-right: 3px" th:src="${c.icon}" height="80"></a></li>
+            </ul>
+        </nav>
     </div>
 </header>
 <section class="Cfn">
