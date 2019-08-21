@@ -18,6 +18,6 @@ public interface CommodityMapper {
     public Commodity selectById(Integer commodityId);
     @Select("select * from commodity limit #{number}")
     public List<Commodity> selectByLimit(Integer number);
-    @Select("select * from commodity where b_id = #{BId}")
-    public List<Commodity> selectByBId(String BId);
+    @Select("select * from commodity where b_id = #{bId}")
+    public List<Commodity> selectByBId(String bId);
 }
