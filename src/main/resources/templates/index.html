@@ -28,20 +28,6 @@
             <img src="images\logoNew.png" title="DeathGhost" alt="模板" onclick="javascript:location.href='/'">
             <span>西安市 [ <a href="#">做下拉框</a> ]</span>
         </div>
-        <div class="Search">
-            <form method="get" id="main_a_serach" onsubmit="return check_search(this)">
-                <div class="Search_nav" id="selectsearch">
-                    <a href="javascript:;" onclick="selectsearch(this,'restaurant_name')" class="choose">餐厅</a>
-                    <a href="javascript:;" onclick="selectsearch(this,'food_name')">食物名</a>
-                </div>
-                <div class="Search_area">
-                    <input type="search" id="fkeyword" name="keyword" placeholder="请输入您所需查找的餐厅名称或食物名称..."
-                           class="searchbox">
-                    <input type="submit" class="searchbutton" value="搜 索">
-                </div>
-            </form>
-        </div>
-    </div>
     <nav class="menu_bg">
         <ul class="menu">
             <li><a href="/index">首页</a></li>
@@ -61,8 +47,8 @@
         <div class="C-time">
             <img src="upload\dc.jpg">
         </div>
-        <a href="list.html" target="_self"><img src="images\by_button.png"></a>
-        <a href="list.html" target="_self"><img src="images\dc_button.png"></a>
+        <a href="/tolist" target="_self"><img src="images\by_button.png"></a>
+        <a href="/tolist" target="_self"><img src="images\dc_button.png"></a>
     </aside>
     <div class="F-middle">
         <ul class="rslides f426x240">
@@ -82,8 +68,8 @@
         <div class="C-time">
             <img src="upload\dc.jpg">
         </div>
-        <a href="list.html" target="_self"><img src="images\by_button.png"></a>
-        <a href="list.html" target="_self"><img src="images\dc_button.png"></a>
+        <a href="business.html" target="_self"><img src="images\by_button.png"></a>
+        <a href="business.html" target="_self"><img src="images\dc_button.png"></a>
     </aside>
 </section>
 <section class="Sfainfor">
@@ -92,9 +78,6 @@
             <ul id="Indextab">
                 <li class="current">点菜</li>
                 <li>餐馆</li>
-                <p class="class_B">
-                    <a href="#" th:each="types : ${commodityTypes}" th:text="${types.type}"></a>
-                </p>
             </ul>
 
             <div id="Indexcontent">
@@ -113,7 +96,7 @@
                         </div>
                     </li>
                 </ul>
-                <ul>
+                <ul>    `
                     <li>
                         <div class="DCcontent">
                             <a href="shop.html" target="_blank" title="TITLE:店名" th:each="store : ${businesss}">
