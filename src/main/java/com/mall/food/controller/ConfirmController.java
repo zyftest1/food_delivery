@@ -1,12 +1,13 @@
 package com.mall.food.controller;
 
+import com.mall.food.mapper.CouponMapper;
+import com.mall.food.mapper.OrderMapper;
 import com.mall.food.mapper.ShoppingCarMapper;
-import com.mall.food.pojo.Order;
-import com.mall.food.pojo.ShoppingCar;
-import com.mall.food.pojo.UserAddress;
-import com.mall.food.pojo.UserCustomer;
+import com.mall.food.mapper.UserCouponMapper;
+import com.mall.food.pojo.*;
 import com.mall.food.service.UserAddressService;
 import com.sun.org.apache.xpath.internal.operations.Mod;
+import com.sun.org.apache.xpath.internal.operations.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,10 +27,19 @@ public class ConfirmController {
     private UserAddressService userAddressService;
     @Autowired
     private ShoppingCarMapper shoppingCarMapper;
+    @Autowired
+    private OrderMapper orderMapper;
+    @Autowired
+    private CouponMapper couponMapper;
+    @Autowired
+    private UserCouponMapper userCouponMapper;
 
+    Order order = null;
     @RequestMapping("/confirm2")
     public String intoConfirm(HttpSession session, Model model) {
+        int i = 0;
         BigDecimal total = new BigDecimal(0);
+        Date date = new Date();
         UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
         if (userCustomer == null ||userCustomer.equals("")){
             return "login";
@@ -43,23 +53,39 @@ public class ConfirmController {
         }
         for (ShoppingCar s:shoppingCars){
             total = total.add(s.getPrice());
+            i++;
         }
+            List<UserCoupon> userCoupons = userCouponMapper.selectUserCouponById(userCustomer.getUserId());
             Order order = Order.builder()
                     .ordName(userCustomer.getName())
-                    .ordAddress(userCustomer.getAddress())
-                    .ordTel(userCustomer.getTel()).build();
-            model.addAttribute("addresses",addresses);
+                    .ordAddress("中北大学文瀛苑九号楼")
+                    .ordTel(userCustomer.getTel())
+                    .schedule("已提交")
+                    .userId(userCustomer.getUserId())
+                    .tel(userCustomer.getTel())
+                    .comId(10001104)
+                    .comName("刀削面肉酱卤")
+                    .price(total)
+                    .quantity(i)
+                    .bId("1001121")
+                    .bTel(userCustomer.getTel())
+                    .bName("")
+                    .createDate(date).build();
+        orderMapper.insert(order);
+        model.addAttribute("addresses",addresses);
         model.addAttribute("shoppingCars",shoppingCars);
         model.addAttribute("total",total);
         model.addAttribute("order",order);
+        model.addAttribute("userCoupons",userCoupons);
 
             return "confirm_order";}
     }
 
-    @RequestMapping("/confirm2.do/{total}")
-    public String confirm(){
-
-        return "";
-    }
+//    @RequestMapping(value = "/confirm2.do")
+//    public Order confirm(HttpSession session,Model model){
+//        UserCustomer userCustomer = (UserCustomer) session.getAttribute("userCustomer");
+//        order.setOrdAddress(couponMapper.deleteById(););
+//        return order;
+//    }
 
 }

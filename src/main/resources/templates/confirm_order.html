@@ -194,7 +194,7 @@ Author URI: http://www.deathghost.cn
     </ul>
    </form>
   </div>
-  <form action="/confirm2.do/" id="confirm">
+  <form id="confirm">
   <div class="inforlist">
    <span class="flow_title">商品清单</span>
    <table>
@@ -219,14 +219,14 @@ Author URI: http://www.deathghost.cn
 <!--     <p><em>订单附言:</em><input name="" type="text"></p>-->
      <p><em>优惠券:</em>
      <select name="">
-      <option>￥10元优惠券</option>
+      <option th:each="u:${userCoupons}" th:text="${u.describes}">￥10元优惠券</option>
      </select>
      </p>
     </div>
     <div class="Sum_infor">
     <p class="p1" th:text="'商品费用：￥'+${total}+'-'+'优惠券：￥10.00'"></p>
     <p class="p2">合计：<span th:text="'￥'+${total}" ></span></p>
-    <input type="submit" value="提交订单" class="p3button">
+    <input type="button" value="提交订单" class="p3button">
     </div>
    </div>
    </form>
@@ -245,7 +245,7 @@ $(document).ready(function(){
 <section class="Psection MT20 Textcenter" style="display:none;" id="Aflow">
   <!-- 订单提交成功后则显示如下 -->
   <p class="Font14 Lineheight35 FontW">恭喜你！订单提交成功！</p>
-  <p class="Font14 Lineheight35 FontW">您的订单编号为：<span class="CorRed" th:text="${date}">201909205134</span></p>
+  <p class="Font14 Lineheight35 FontW">您的订单编号为：<span class="CorRed" th:text="${order.getOrdId()}">201909205134</span></p>
   <p class="Font14 Lineheight35 FontW">共计金额：<span class="CorRed" th:text="'￥'+${total}">359</span></p>
   <p><button type="button" class="Lineheight35"><a href="#" target="_blank">支付宝立即支付</a></button><button type="button" class="Lineheight35"><a href="user_center.html">进入用户中心</a></button></p>
 </section>
