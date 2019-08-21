@@ -11,10 +11,11 @@ public class Order {
     private String schedule;
     private String userId;
     private String tel;
-    private Integer conId;
+    private Integer comId;
+    private String comName;
     private Integer price;
     private Integer quantity;
-    private String bID;
+    private String bId;
     private String bName;
     private String bTel;
     private Date createDate;
