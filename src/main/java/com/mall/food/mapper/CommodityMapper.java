@@ -16,8 +16,14 @@ public interface CommodityMapper {
     public List<Commodity> selectByType(String commodityType);
     @Select("select * from commodity where com_id = #{commodityId}")
     public Commodity selectById(Integer commodityId);
+
     @Select("select * from commodity limit #{number}")
     public List<Commodity> selectByLimit(Integer number);
-    @Select("select * from commodity where b_id = #{BId}")
-    public List<Commodity> selectByBId(String BId);
+
+    @Select("select * from commodity where b_id = #{bId}")
+    public List<Commodity> selectByBId(String bId);
+
+    @Select("select * from commodity where com_name like concat('%',#{com_name},'%') limit 6")
+    public List<Commodity> selectByLike(String com_name);
+
 }

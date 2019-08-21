@@ -54,46 +54,46 @@ public class FoodDeliveryApplicationTests {
         System.out.println(coupons);
     }
 
-    @Autowired
-    private AdvertisementMapper advertisementMapper;
+//    @Autowired
+//    private AdvertisementMapper advertisementMapper;
 
-    @Test
-    public void contextLoads3(){
-        List<Advertisement> empList = advertisementMapper.selectAll();
-        System.out.println(empList);
-    }
-
-    @Autowired
-    private UserCustomerMapper businessMapper;
-
-    @Test
-    public void contextLoads4(){
-        UserCustomer empList = businessMapper.selectUserCustomerByUserName("花花");
-        System.out.println(empList);
-    }
-
-    @Test
-    public void contextLoads5(){
-        BigDecimal bigDecimal = BigDecimal.valueOf(0.00);
-        UserCustomer userCustomer = UserCustomer.builder().userId("123").userName("123").tel("123").password("123456").userKey("123456").balance(bigDecimal).member(1).build();
-        System.out.println(userCustomer);
-        businessMapper.insertUserCustomer(userCustomer);
-        List<UserCustomer> empList = businessMapper.selectAll();
-        System.out.println(empList);
-    }
-
-    @Autowired
-    private BusinessMapper businessMapper1;
-    @Test
-    public void contextLoads6(){
-        BigDecimal bigDecimal = BigDecimal.valueOf(0.00);
-        BigDecimal bigDecimal2 = BigDecimal.valueOf(0.00);
-        Business userCustomer = Business.builder().bId("123").bName("123").bTel("123").password("123456").key("123456").balance(bigDecimal).bDelivery(bigDecimal2).build();
-        System.out.println(userCustomer);
-        businessMapper1.insert(userCustomer);
-        List<Business> empList = businessMapper1.selectAll();
-        System.out.println(empList);
-    }
+//    @Test
+//    public void contextLoads3(){
+//        List<Advertisement> empList = advertisementMapper.selectAll();
+//        System.out.println(empList);
+//    }
+//
+//    @Autowired
+//    private UserCustomerMapper businessMapper;
+//
+//    @Test
+//    public void contextLoads4(){
+//        UserCustomer empList = businessMapper.selectUserCustomerByUserName("花花");
+//        System.out.println(empList);
+//    }
+//
+//    @Test
+//    public void contextLoads5(){
+//        BigDecimal bigDecimal = BigDecimal.valueOf(0.00);
+//        UserCustomer userCustomer = UserCustomer.builder().userId("123").userName("123").tel("123").password("123456").userKey("123456").balance(bigDecimal).member(1).build();
+//        System.out.println(userCustomer);
+//        businessMapper.insertUserCustomer(userCustomer);
+//        List<UserCustomer> empList = businessMapper.selectAll();
+//        System.out.println(empList);
+//    }
+//
+//    @Autowired
+//    private BusinessMapper businessMapper1;
+//    @Test
+//    public void contextLoads6(){
+//        BigDecimal bigDecimal = BigDecimal.valueOf(0.00);
+//        BigDecimal bigDecimal2 = BigDecimal.valueOf(0.00);
+//        Business userCustomer = Business.builder().bId("123").bName("123").bTel("123").password("123456").key("123456").balance(bigDecimal).bDelivery(bigDecimal2).build();
+//        System.out.println(userCustomer);
+//        businessMapper1.insert(userCustomer);
+//        List<Business> empList = businessMapper1.selectAll();
+//        System.out.println(empList);
+//    }
 
 
 

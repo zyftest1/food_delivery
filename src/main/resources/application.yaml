@@ -55,7 +55,7 @@ spring:
     serialization:
       write-dates-as-timestamps: false
   resources:
-    static-locations: classpath:\static,classpath:\templates
+    static-locations: classpath:\static,classpath:\templates,classpath:templates/user_center.html
 mybatis:
   configuration:
     map-underscore-to-camel-case: true

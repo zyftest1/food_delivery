@@ -34,5 +34,4 @@ public class DetailController {
         model.addAttribute("commoditysByBId",commodityList);
         return "shop";
     }
-
 }
