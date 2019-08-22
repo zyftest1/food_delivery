@@ -50,14 +50,12 @@
                 <a href="/register">注册</a>/<a href="/login">登录</a><a href="#">QQ客服</a><a href="#">微信客服</a><a href="#">手机客户端</a>
             </div>
             <div class="LeftNav" th:if="${session.userCustomer != null}">
-                <a href="/account" th:text="${session.userCustomer.userName}"></a>/<a href="/logout">注销</a><a href="#">QQ客服</a><a href="#">微信客服</a><a href="#">手机客户端</a>
+                <a href="/account" th:text="${session.userCustomer.userName}"></a>/<a href="/logout">注销</a><a href="#">QQ客服</a><a
+                    href="#">微信客服</a><a href="#">手机客户端</a>
             </div>
             <div class="RightNav">
-                <a href="/center">用户中心</a>
-                <a href="/orderlist" target="_blank" title="我的订单">我的订单</a>
-                <a href="/cart">购物车（0）</a>
-                <a href="/favorites" target="_blank" title="我的收藏">我的收藏</a>
-                <a href="#">商家入驻</a>
+                <a href="/center">用户中心</a> <a href="/orderlist" target="_blank" title="我的订单">我的订单</a> <a href="/cart">购物车（0）</a>
+                <a href="/favorites" target="_blank" title="我的收藏">我的收藏</a> <a href="#">商家入驻</a>
             </div>
         </div>
     </section>
@@ -120,7 +118,7 @@
             <img src="upload\dc.jpg">
         </div>
         <a href="/toShopList" target="_self"><img src="images\by_button.png"></a>
-        <a href="/toShopList" target="_self"><img src="images\dc_button2.png"></a>
+        <a href="/toShopList" target="_self"><img src="images\dc_button.png"></a>
     </aside>
 </section>
 <section class="Sfainfor">
@@ -129,16 +127,14 @@
             <ul id="Indextab">
                 <li class="current">点菜</li>
                 <li>餐馆</li>
-                <p class="class_B">
-                    <a href="#" th:each="types : ${commodityTypes}" th:text="${types.type}"></a>
-                </p>
             </ul>
 
             <div id="Indexcontent">
                 <ul style="display:block;">
                     <li>
                         <div class="SCcontent">
-                            <a target="_blank" title="菜品名称" th:each="commodity : ${commoditys}" th:href="@{'/detail?comId='+${commodity.comId}}">
+                            <a target="_blank" title="菜品名称" th:each="commodity : ${commoditys}"
+                               th:href="@{'/detail?comId='+${commodity.comId}}">
                                 <figure>
                                     <img th:src="${commodity.picture}">
                                     <figcaption>
@@ -150,10 +146,11 @@
                         </div>
                     </li>
                 </ul>
-                <ul>
+                <ul> `
                     <li>
                         <div class="DCcontent">
-                            <a href="shop.html" target="_blank" title="TITLE:店名" th:each="store : ${businesss}">
+                            <a href="shop.html" target="_blank" title="TITLE:店名" th:each="store : ${businesss}"
+                               th:href="@{'/toShop?bId='+${store.bId}}">
                                 <figure>
                                     <img th:src="${store.bPicture}">
                                     <span class="title" th:text="${store.bName}">店名</span>

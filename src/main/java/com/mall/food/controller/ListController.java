@@ -34,4 +34,13 @@ public class ListController {
         System.out.println(businessList);
         return "business";
     }
+    @RequestMapping("/selectCommodityByType")
+    public String selectByCType(String cType,Model model){
+        List<CommodityType> commodityTypeList = commodityService.selectAllCommodityType();
+        model.addAttribute("cTypes",commodityTypeList);
+        List<Commodity> commodityList = commodityService.selectByTypeCommodity(cType);
+        model.addAttribute("allCommodity",commodityList);
+        System.out.println(commodityList);
+        return "list";
+    }
 }

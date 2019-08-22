@@ -2,6 +2,7 @@ package com.mall.food.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.mall.food.mapper.CommodityCommentMapper;
 import com.mall.food.pojo.*;
 import com.mall.food.service.CouponService;
 import com.mall.food.service.impl.AdvertisementServiceImpl;
@@ -28,7 +29,7 @@ public class IndexController {
     @Autowired
     BusinessServiceImpl businessService;
     @RequestMapping("/")
-    public String initPageShopList(Model model, HttpSession session, @RequestParam(value = "p",defaultValue = "1") Integer pages){
+    public String initPageShopList(Model model, HttpSession session,@RequestParam(value = "p",defaultValue = "1") Integer pages){
         List<Advertisement> advertisementList = advertisementService.selectAllAdvertisement();
         model.addAttribute("advertisements",advertisementList);
         List<CommodityType> commodityTypeList = commodityService.selectAllCommodityType();

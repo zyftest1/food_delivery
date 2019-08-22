@@ -85,8 +85,8 @@ function GetCount() {
 			setTotal(); GetCount();
 		})
 		function setTotal() {
-			$("#total2").html((parseInt(t.val()) * price).toFixed(2));
-			$("#newslist-2").val(parseInt(t.val()) * price);
+			$("#total2").html((parseInt(t.val()) * 59.0).toFixed(2));
+			$("#newslist-2").val(parseInt(t.val()) * 59.0);
 		}
 		setTotal();
 	})
@@ -103,8 +103,8 @@ function GetCount() {
 			setTotal(); GetCount();
 		})
 		function setTotal() {
-			$("#total1").html((parseInt(t.val()) * price).toFixed(2));
-			$("#newslist-1").val(parseInt(t.val()) * price);
+			$("#total1").html((parseInt(t.val()) * 59.0).toFixed(2));
+			$("#newslist-1").val(parseInt(t.val()) * 59.0);
 		}
 		setTotal();
 	})

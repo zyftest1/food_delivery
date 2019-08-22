@@ -245,7 +245,7 @@ $(document).ready(function(){
 <section class="Psection MT20 Textcenter" style="display:none;" id="Aflow">
   <!-- 订单提交成功后则显示如下 -->
   <p class="Font14 Lineheight35 FontW">恭喜你！订单提交成功！</p>
-  <p class="Font14 Lineheight35 FontW">您的订单编号为：<span class="CorRed" th:text="${order.getOrdId()}">201909205134</span></p>
+  <p class="Font14 Lineheight35 FontW">您的订单编号为：<span class="CorRed" th:value="${order.getOrdId()}">2110500041</span></p>
   <p class="Font14 Lineheight35 FontW">共计金额：<span class="CorRed" th:text="'￥'+${total}">359</span></p>
   <p><button type="button" class="Lineheight35"><a href="#" target="_blank">支付宝立即支付</a></button><button type="button" class="Lineheight35"><a href="user_center.html">进入用户中心</a></button></p>
 </section>
