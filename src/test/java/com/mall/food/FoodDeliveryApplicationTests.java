@@ -56,6 +56,12 @@ public class FoodDeliveryApplicationTests {
         List<Coupon> coupons = couponMapper.selAllCoupons();
         System.out.println(coupons);
     }
+    @Test
+    public void updateTest(){
+        Order order = orderMapper.selOrderById(2110500011);
+        order.setSchedule("待收货");
+        orderMapper.update(order);
+    }
 
 //    @Autowired
 //    private AdvertisementMapper advertisementMapper;

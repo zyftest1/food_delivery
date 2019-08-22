@@ -98,6 +98,11 @@
             <artifactId>bootstrap</artifactId>
             <version>4.3.1</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.2.5</version>
+        </dependency>
 <!--        &lt;!&ndash;            //验证码&ndash;&gt;-->
 <!--        &lt;!&ndash; https://mvnrepository.com/artifact/com.github.whvcse/EasyCaptcha &ndash;&gt;-->
 <!--        <dependency>-->

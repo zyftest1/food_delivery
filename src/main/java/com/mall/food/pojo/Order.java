@@ -5,8 +5,8 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.util.Date;
 
-@Builder
 @Data
+@Builder
 public class Order {
     private Integer ordId;
     private String ordName;
@@ -16,7 +16,7 @@ public class Order {
     private String userId;
     private String tel;
     private Integer comId;
-    private String  comName;
+    private String comName;
     private BigDecimal price;
     private Integer quantity;
     private String bId;

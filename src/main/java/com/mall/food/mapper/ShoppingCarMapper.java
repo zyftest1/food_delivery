@@ -12,7 +12,10 @@ public interface ShoppingCarMapper {
     @Select("select * from shopping_car")
     public List<ShoppingCar> selAllShoppingCars();
 
-    @Select("select * from shopping_car where car_id = {#carId}")
+    @Select("select * from shopping_car where user_id = #{userId}")
+    public List<ShoppingCar> selByUserId(String  userId);
+
+    @Select("select * from shopping_car where car_id = #{carId}")
     public ShoppingCar selShoppingCarById(Integer carId);
 
     @Insert("insert into shopping_car(user_id,b_id,user_name,com_id,com_name,price,quantity,size,describes,picture,add_id,address)" +
@@ -26,5 +29,7 @@ public interface ShoppingCarMapper {
 
     @Delete("delete from shopping_car where car_id = #{carId}")
     public void deleteById(Integer carId);
+
+
 
 }

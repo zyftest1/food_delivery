@@ -10,6 +10,23 @@
 <script type="text/javascript" src="js\public.js"></script>
 <script type="text/javascript" src="js\jquery.js"></script>
 <script type="text/javascript" src="js\jqpublic.js"></script>
+<script type="text/javascript" src="webjars/jquery/3.4.1/jquery.js"></script>
+    <script type="text/javascript">
+        function receve(ordId) {
+            $.ajax({
+               url:"/upOrders",
+               data:{"ordId":ordId},
+               success:function(data){
+                 if (data.msg=="收货成功"){
+                     window.location.reload();
+                     alert("收货成功")
+                 } else{
+                     alert("收货失败")
+                 }
+               }
+            })
+        }
+    </script>
 <!--
 Author: DeathGhost
 Author URI: http://www.deathghost.cn
@@ -68,6 +85,7 @@ Author URI: http://www.deathghost.cn
  <article class="U-article Overflow">
   <!--user order list-->
   <section>
+      <from>
     <table class="Myorder">
      <th class="Font14 FontW">订单编号</th>
      <th class="Font14 FontW">下单时间</th>
@@ -75,24 +93,25 @@ Author URI: http://www.deathghost.cn
      <th class="Font14 FontW">订单总金额</th>
      <th class="Font14 FontW">订单状态</th>
      <th class="Font14 FontW">操作</th>
-     <tr>
-      <td class="FontW"><a href="/order">201409225367</a></td>
-      <td>2014-09-22 19:21:38</td>
-      <td>DeathGhost</td>
-      <td>￥328.00</td>
-      <td>未付款,未发货</td>
-      <td><a href="#">取消订单</a> | <a href="#">付款</a></td>
+     <tr th:each="order:${page.list}">
+      <td class="FontW"><a href="/order" id="ordId" th:text="${order.getOrdId()}"></a></td>
+      <td th:text="${#calendars.format(order.getCreateDate(),'yyyy-MM-dd')}"></td>
+      <td th:text="${order.getOrdName()}"></td>
+      <td th:text="${order.getPrice()}"></td>
+      <td id ="schedule" th:text="${order.getSchedule()}"></td>
+      <td ><button id="rece" th:onclick="'javascript:receve('+${order.getOrdId()}+')'" th:if="${order.getSchedule() != '完结' && order.getSchedule() != '已提交'}" style="border: none">收货</button></td>
      </tr>
     </table>
+      </from>
     <div class="TurnPage">
-         <a href="#">
+         <a th:href="@{/orderlist(pageNume = 1)}">
           <span class="Prev"><i></i>首页</span>
          </a>
-         <a href="#"><span class="PNumber">1</span></a>
-         <a href="#"><span class="PNumber">2</span></a>
-         <a href="#">
-         <span class="Next">最后一页<i></i></span>
-        </a>
+         <a th:if="${not page.isIsFirstPage()}" th:href="@{/orderlist(pageNum=${page.getPageNum()-1})}"><span class="PNumber">上一页</span></a>
+         <a th:if="${not page.isIsLastPage()}" th:href="@{/orderlist(pageNum=${page.getPageNum()+1})}"><span class="PNumber">下一页</span></a>
+         <a th:href="@{/orderlist(pageNum=${page.getPageSize()-1})}"><span class="Next">最后一页<i></i></span></a>
+         <span span class="PNumber">第 [[${page.getPageNum()}]] 页</span>
+         <span span class="PNumber">共 [[${page.getPages()}]] 页</span>
        </div>
   </section>
  </article>
